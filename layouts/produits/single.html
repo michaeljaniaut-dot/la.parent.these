@@ -1,0 +1,368 @@
+{{ define "main" }}
+<div class="product-detail-page">
+  <nav class="breadcrumb">
+    <a href="/">Accueil</a> / <a href="/boutique/">{{ .Title }}</a>
+  </nav>
+
+  <div class="product-nav-top">
+    {{ with .PrevInSection }}
+    <a href="{{ .Permalink }}" class="nav-arrow">◀ Précédent</a>
+    {{ end }}
+    {{ with .NextInSection }}
+    <a href="{{ .Permalink }}" class="nav-arrow">Suivant ▶</a>
+    {{ end }}
+  </div>
+
+  <div class="product-container">
+    <!-- Galerie gauche -->
+    <div class="product-gallery-section">
+      {{ $images := .Params.images }}
+      {{ if $images }}
+        <div class="main-product-image">
+          <img id="mainProductImg" src="{{ index $images 0 }}" alt="{{ .Title }}">
+        </div>
+        <div class="thumbnail-gallery">
+          {{ range $index, $img := $images }}
+            <img src="{{ $img }}" 
+                 alt="Image {{ add $index 1 }}"
+                 onclick="changeProductImage('{{ $img }}', this)"
+                 class="product-thumb {{ if eq $index 0 }}active-thumb{{ end }}">
+          {{ end }}
+        </div>
+      {{ end }}
+    </div>
+
+    <!-- Info droite -->
+    <div class="product-details-section">
+      <h1 class="product-name">{{ .Title }}</h1>
+      
+      <div class="product-pricing">
+        {{ if .Params.old_price }}
+          <span class="price-crossed">{{ .Params.old_price }}€</span>
+        {{ end }}
+        <span class="price-current">{{ .Params.price }}€</span>
+      </div>
+
+      {{ if .Params.description }}
+      <p class="product-tagline">{{ .Params.description }}</p>
+      {{ end }}
+
+      <div class="product-content">
+        {{ .Content }}
+      </div>
+
+      <!-- Sélection taille -->
+      <div class="product-options">
+        <label class="option-label">Taille *</label>
+        <select class="option-select">
+          <option>Sélectionner</option>
+          <option>Taille 1 (0-6 mois)</option>
+          <option>Taille 2 (6-12 mois)</option>
+        </select>
+      </div>
+
+      <!-- Quantité -->
+      <div class="product-quantity">
+        <label class="option-label">Quantité *</label>
+        <div class="qty-controls">
+          <button class="qty-btn" onclick="changeQty(-1)">-</button>
+          <input type="number" id="qtyInput" value="1" min="1" max="10" readonly>
+          <button class="qty-btn" onclick="changeQty(1)">+</button>
+        </div>
+      </div>
+
+      <!-- Bouton Ajouter au panier -->
+      <button class="btn-add-cart">Ajouter au panier</button>
+
+      <!-- Paiement direct -->
+      <div class="direct-payment">
+        <div class="payment-options">
+          <a href="https://buy.stripe.com/VOTRE-LIEN-POMMES" class="payment-btn stripe-btn" target="_blank">💳 Stripe</a>
+          <a href="https://www.paypal.com/paypalme/VOTRE-LIEN/{{ .Params.price }}" class="payment-btn paypal-btn" target="_blank">💰 PayPal</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+.product-detail-page {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 20px;
+  background: #FFF9F5;
+}
+
+.breadcrumb {
+  margin-bottom: 20px;
+  font-size: 14px;
+  color: #666;
+}
+
+.breadcrumb a {
+  color: #8B4513;
+  text-decoration: none;
+}
+
+.product-nav-top {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 30px;
+}
+
+.nav-arrow {
+  padding: 10px 20px;
+  background: #f5f5f5;
+  border-radius: 8px;
+  text-decoration: none;
+  color: #333;
+  font-weight: 500;
+}
+
+.nav-arrow:hover {
+  background: #8B4513;
+  color: white;
+}
+
+.product-container {
+  display: grid;
+  grid-template-columns: 45% 55%;
+  gap: 60px;
+  background: white;
+  padding: 40px;
+  border-radius: 12px;
+}
+
+.product-gallery-section {
+  position: sticky;
+  top: 20px;
+  height: fit-content;
+}
+
+.main-product-image {
+  width: 100%;
+  background: #f9f9f9;
+  border-radius: 12px;
+  margin-bottom: 20px;
+  overflow: hidden;
+}
+
+.main-product-image img {
+  width: 100%;
+  height: auto;
+  max-height: 600px;
+  object-fit: contain;
+}
+
+.thumbnail-gallery {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.product-thumb {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 8px;
+  cursor: pointer;
+  border: 3px solid transparent;
+  transition: all 0.3s ease;
+}
+
+.product-thumb:hover,
+.product-thumb.active-thumb {
+  border-color: #8B4513;
+}
+
+.product-details-section {
+  padding: 20px 0;
+}
+
+.product-name {
+  font-size: 36px;
+  font-weight: 400;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.product-pricing {
+  font-size: 28px;
+  margin-bottom: 25px;
+}
+
+.price-crossed {
+  text-decoration: line-through;
+  color: #999;
+  margin-right: 10px;
+}
+
+.price-current {
+  font-weight: 700;
+  color: #333;
+}
+
+.product-tagline {
+  font-size: 16px;
+  line-height: 1.6;
+  margin-bottom: 20px;
+  color: #666;
+}
+
+.product-content {
+  margin-bottom: 30px;
+  line-height: 1.8;
+}
+
+.option-label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: #333;
+}
+
+.option-select {
+  width: 100%;
+  padding: 12px 16px;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  font-size: 16px;
+  margin-bottom: 20px;
+  cursor: pointer;
+}
+
+.option-select:focus {
+  border-color: #8B4513;
+  outline: none;
+}
+
+.product-quantity {
+  margin-bottom: 25px;
+}
+
+.qty-controls {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.qty-btn {
+  width: 45px;
+  height: 45px;
+  border: 2px solid #ddd;
+  background: white;
+  border-radius: 8px;
+  font-size: 20px;
+  cursor: pointer;
+  color: #333;
+  transition: all 0.3s ease;
+}
+
+.qty-btn:hover {
+  border-color: #8B4513;
+  background: #8B4513;
+  color: white;
+}
+
+#qtyInput {
+  width: 70px;
+  height: 45px;
+  text-align: center;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.btn-add-cart {
+  width: 100%;
+  padding: 16px;
+  background: #8B4513;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 18px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-bottom: 15px;
+  transition: all 0.3s ease;
+}
+
+.btn-add-cart:hover {
+  background: #6d3410;
+}
+
+.direct-payment {
+  margin-top: 20px;
+}
+
+.payment-options {
+  display: flex;
+  gap: 10px;
+}
+
+.payment-btn {
+  flex: 1;
+  padding: 12px;
+  border-radius: 8px;
+  text-align: center;
+  font-weight: 600;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.stripe-btn {
+  background: #635BFF;
+  color: white;
+}
+
+.stripe-btn:hover {
+  background: #5147E5;
+}
+
+.paypal-btn {
+  background: #0070BA;
+  color: white;
+}
+
+.paypal-btn:hover {
+  background: #005A94;
+}
+
+@media (max-width: 968px) {
+  .product-container {
+    grid-template-columns: 1fr;
+    gap: 30px;
+    padding: 20px;
+  }
+  
+  .product-gallery-section {
+    position: relative;
+  }
+  
+  .product-nav-top {
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+}
+</style>
+
+<script>
+function changeProductImage(src, thumb) {
+  document.getElementById('mainProductImg').src = src;
+  
+  document.querySelectorAll('.product-thumb').forEach(t => {
+    t.classList.remove('active-thumb');
+  });
+  thumb.classList.add('active-thumb');
+}
+
+function changeQty(delta) {
+  const input = document.getElementById('qtyInput');
+  let val = parseInt(input.value) + delta;
+  if (val < 1) val = 1;
+  if (val > 10) val = 10;
+  input.value = val;
+}
+</script>
+{{ end }}

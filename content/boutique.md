@@ -47,6 +47,12 @@ featured_image: ""
   box-shadow: 0 2px 12px rgba(0,0,0,0.1);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   position: relative;
+  cursor: pointer;
+}
+
+.product-card a {
+  text-decoration: none;
+  color: inherit;
 }
 
 .product-card:hover {
@@ -175,18 +181,18 @@ featured_image: ""
 
 <!-- Produit 1 -->
 <div class="product-card">
-  <div class="product-badge badge-rupture">Bientôt en rupture</div>
-  <img src="/images/produits/sarouel-pommes-1.jpg" alt="Sarouel évolutif chaud motif pommes" class="product-image">
+  <a href="/produits/sarouel-pommes/">
+    <div class="product-badge badge-rupture">Bientôt en rupture</div>
+    <img src="/images/produits/sarouel-pommes-1.jpg" alt="Sarouel évolutif chaud motif pommes" class="product-image">
+    <div class="product-info">
+      <div class="product-title">Sarouel évolutif chaud motif pommes</div>
+      <div class="product-price">
+        <span class="price-old">20,00€</span> 14,00€
+      </div>
+    </div>
+  </a>
   <div class="product-info">
-    <div class="product-title">Sarouel évolutif chaud motif pommes</div>
-    <div class="product-price">
-      <span class="price-old">20,00€</span> 14,00€
-    </div>
-    <button class="add-to-cart" onclick="alert('Contactez-nous pour commander')">Ajouter au panier</button>
-    <div class="payment-options">
-      <a href="https://buy.stripe.com/VOTRE-LIEN-POMMES" class="payment-btn stripe-btn" target="_blank">💳 Stripe</a>
-      <a href="https://www.paypal.com/paypalme/VOTRE-LIEN/14" class="payment-btn paypal-btn" target="_blank">💰 PayPal</a>
-    </div>
+    <button class="add-to-cart" onclick="window.location.href='/produits/sarouel-pommes/'">Voir le produit</button>
   </div>
 </div>
 
