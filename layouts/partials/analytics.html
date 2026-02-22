@@ -1,0 +1,35 @@
+<!-- Google Analytics 4 -->
+{{ if .Site.Params.googleAnalytics }}
+<script async src="https://www.googletagmanager.com/gtag/js?id={{ .Site.Params.googleAnalytics }}"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', '{{ .Site.Params.googleAnalytics }}');
+</script>
+
+<!-- Event Tracking -->
+<script>
+document.addEventListener('click', function(e) {
+  if (e.target.closest('.stripe-btn')) {
+    gtag('event', 'click_payment', {
+      'payment_method': 'stripe',
+      'event_category': 'engagement'
+    });
+  }
+  
+  if (e.target.closest('.paypal-btn')) {
+    gtag('event', 'click_payment', {
+      'payment_method': 'paypal',
+      'event_category': 'engagement'
+    });
+  }
+  
+  if (e.target.closest('.add-to-cart') || e.target.closest('.btn-add-cart')) {
+    gtag('event', 'add_to_cart', {
+      'event_category': 'ecommerce'
+    });
+  }
+});
+</script>
+{{ end }}

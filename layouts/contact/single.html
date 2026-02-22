@@ -1,0 +1,222 @@
+{{ define "main" }}
+<style>
+  .contact-container {
+    background-color: #f4d4c8;
+    min-height: 100vh;
+    padding: 2rem 0;
+  }
+  
+  .contact-content {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 1rem;
+  }
+  
+  .contact-card {
+    background: white;
+    border-radius: 8px;
+    padding: 3rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    margin-bottom: 2rem;
+  }
+  
+  .contact-title {
+    font-family: 'Georgia', 'Times New Roman', serif;
+    font-size: 2.5rem;
+    color: #5c3d2e;
+    margin-bottom: 1rem;
+  }
+  
+  .faq-section {
+    margin-top: 3rem;
+  }
+  
+  .faq-tabs {
+    display: flex;
+    gap: 0;
+    margin-bottom: 2rem;
+    border-bottom: 2px solid #d4b4a8;
+    flex-wrap: wrap;
+  }
+  
+  .faq-tab {
+    padding: 1rem 2rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+    color: #5c3d2e;
+    position: relative;
+    transition: all 0.3s;
+    border-bottom: 3px solid transparent;
+  }
+  
+  .faq-tab:hover {
+    background-color: rgba(92, 61, 46, 0.1);
+  }
+  
+  .faq-tab.active {
+    border-bottom: 3px solid #5c3d2e;
+    font-weight: bold;
+  }
+  
+  .faq-theme {
+    display: none;
+  }
+  
+  .faq-theme.active {
+    display: block;
+  }
+  
+  .faq-item {
+    border-bottom: 1px solid #eee;
+    padding: 1.5rem 0;
+  }
+  
+  .faq-item:last-child {
+    border-bottom: none;
+  }
+  
+  .faq-question-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    user-select: none;
+  }
+  
+  .faq-question {
+    font-size: 1.1rem;
+    color: #5c3d2e;
+    margin: 0;
+    flex: 1;
+  }
+  
+  .faq-toggle {
+    font-size: 1.5rem;
+    color: #5c3d2e;
+    transition: transform 0.3s;
+    margin-left: 1rem;
+  }
+  
+  .faq-item.open .faq-toggle {
+    transform: rotate(180deg);
+  }
+  
+  .faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+    color: #666;
+    line-height: 1.6;
+  }
+  
+  .faq-item.open .faq-answer {
+    max-height: 500px;
+    padding-top: 1rem;
+  }
+  
+  @media (max-width: 768px) {
+    .contact-card {
+      padding: 1.5rem;
+    }
+    
+    .contact-title {
+      font-size: 2rem;
+    }
+    
+    .faq-tab {
+      padding: 0.75rem 1rem;
+      font-size: 0.9rem;
+    }
+  }
+</style>
+
+<div class="contact-container">
+  <div class="contact-content">
+    <div class="contact-card">
+      <h1 class="contact-title">Contact</h1>
+      
+      <div>
+        {{ .Content }}
+      </div>
+      
+      <div class="faq-section">
+        <h2 style="font-family: 'Georgia', 'Times New Roman', serif; color: #5c3d2e; margin-bottom: 2rem;">FAQ - Questions Fréquentes</h2>
+        
+        <div class="faq-tabs">
+          {{ $themes := .Site.Data.faq.themes.themes }}
+          {{ range $index, $theme := $themes }}
+            <button class="faq-tab{{ if eq $index 0 }} active{{ end }}" data-theme="{{ $theme.id }}">
+              {{ $theme.title }}
+            </button>
+          {{ end }}
+        </div>
+        
+        <div class="faq-themes">
+          {{ $themes := .Site.Data.faq.themes.themes }}
+          {{ range $index, $theme := $themes }}
+            {{ $themeData := index $.Site.Data.faq $theme.id }}
+            {{ if $themeData }}
+            <div class="faq-theme{{ if eq $index 0 }} active{{ end }}" id="theme-{{ $theme.id }}">
+              {{ if $themeData.questions }}
+                {{ range $themeData.questions }}
+                  <div class="faq-item">
+                    <div class="faq-question-wrapper">
+                      <h3 class="faq-question">{{ .question }}</h3>
+                      <span class="faq-toggle">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                      <p>{{ .answer }}</p>
+                    </div>
+                  </div>
+                {{ end }}
+              {{ else }}
+                <p style="color: #999; font-style: italic;">Aucune question pour le moment</p>
+              {{ end }}
+            </div>
+            {{ end }}
+          {{ end }}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Gestion des onglets
+    const tabs = document.querySelectorAll('.faq-tab');
+    const themes = document.querySelectorAll('.faq-theme');
+    
+    tabs.forEach(tab => {
+      tab.addEventListener('click', function() {
+        // Désactiver tous les onglets et thèmes
+        tabs.forEach(t => t.classList.remove('active'));
+        themes.forEach(t => t.classList.remove('active'));
+        
+        // Activer l'onglet cliqué
+        tab.classList.add('active');
+        
+        // Activer le thème correspondant
+        const themeId = tab.dataset.theme;
+        const themeElement = document.getElementById('theme-' + themeId);
+        if (themeElement) {
+          themeElement.classList.add('active');
+        }
+      });
+    });
+    
+    // Gestion des questions/réponses dépliables
+    const items = document.querySelectorAll('.faq-item');
+    
+    items.forEach(item => {
+      const wrapper = item.querySelector('.faq-question-wrapper');
+      
+      wrapper.addEventListener('click', function() {
+        item.classList.toggle('open');
+      });
+    });
+  });
+</script>
+{{ end }}

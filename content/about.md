@@ -4,6 +4,100 @@ description: "Elisabeth - Accompagnement perinatal et parentalite"
 featured_image: ""
 ---
 
+<style>
+.hero-carousel {
+  width: 100%;
+  height: 350px;
+  overflow: hidden;
+  position: relative;
+  margin: 0 0 40px 0;
+}
+
+.carousel-track {
+  display: flex;
+  height: 100%;
+  animation: step-scroll 18s steps(6) infinite;
+}
+
+.carousel-slide {
+  min-width: 33.333%;
+  height: 100%;
+  flex-shrink: 0;
+}
+
+.carousel-slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+@keyframes step-scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-200%); }
+}
+
+@media (max-width: 768px) {
+  .hero-carousel {
+    height: 250px;
+  }
+  .carousel-slide {
+    min-width: 100%;
+  }
+  @keyframes step-scroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-600%); }
+  }
+}
+
+.about-content {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  line-height: 1.8;
+}
+
+.about-content p {
+  margin-bottom: 20px;
+  font-size: 16px;
+}
+</style>
+
+<div class="hero-carousel">
+  <div class="carousel-track">
+    <!-- Images originales -->
+    <div class="carousel-slide">
+      <img src="/images/about/baby-hand.jpg" alt="Bébé tenant la main">
+    </div>
+    <div class="carousel-slide">
+      <img src="/images/about/baby-sleeping.jpg" alt="Bébé endormi avec doudou">
+    </div>
+    <div class="carousel-slide">
+      <img src="/images/about/baby-feet.jpg" alt="Petits pieds de bébé">
+    </div>
+    <div class="carousel-slide">
+      <img src="/images/about/baby-yawning.jpg" alt="Bébé qui baille">
+    </div>
+    <div class="carousel-slide">
+      <img src="/images/about/mother-baby.jpg" alt="Maman et bébé">
+    </div>
+    <div class="carousel-slide">
+      <img src="/images/about/baby-portage.jpg" alt="Portage physiologique">
+    </div>
+    <!-- Dupliquer pour effet infini -->
+    <div class="carousel-slide">
+      <img src="/images/about/baby-hand.jpg" alt="Bébé tenant la main">
+    </div>
+    <div class="carousel-slide">
+      <img src="/images/about/baby-sleeping.jpg" alt="Bébé endormi avec doudou">
+    </div>
+    <div class="carousel-slide">
+      <img src="/images/about/baby-feet.jpg" alt="Petits pieds de bébé">
+    </div>
+  </div>
+</div>
+
+<div class="about-content">
+
 # A Propos de Moi
 
 Je m'appelle Elisabeth, j'ai 39 ans (ouch!) et je suis l'heureuse maman de 3 enfants.
@@ -55,6 +149,8 @@ N'hésitez pas à visiter mon site et à me contacter pour toutes questions, rem
 A très vite !
 
 **Elisabeth**
+
+</div>
 
 ---
 

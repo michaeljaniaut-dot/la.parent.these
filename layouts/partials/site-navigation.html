@@ -1,0 +1,220 @@
+<header class="site-header">
+  <nav class="main-nav">
+    <div class="nav-container">
+      <!-- Menu principal -->
+      <ul class="nav-menu">
+        <li><a href="/" class="{{ if eq .RelPermalink "/" }}active{{ end }}">Accueil</a></li>
+        <li><a href="/prestations/" class="{{ if eq .Section "prestations" }}active{{ end }}">Prestations</a></li>
+        <li><a href="/rdv/" class="{{ if eq .RelPermalink "/rdv/" }}active{{ end }}">Prendre RDV</a></li>
+        <li><a href="/boutique/" class="{{ if eq .Section "boutique" }}active{{ end }}">Boutique</a></li>
+        <li><a href="/blog/" class="{{ if eq .Section "blog" }}active{{ end }}">Blog</a></li>
+        <li><a href="/contact/" class="{{ if eq .RelPermalink "/contact/" }}active{{ end }}">Contact et FAQ</a></li>
+        <li><a href="/about/" class="{{ if eq .RelPermalink "/about/" }}active{{ end }}">À propos de moi</a></li>
+      </ul>
+      
+      <!-- Panier uniquement -->
+      <div class="nav-actions">
+        <a href="/panier/" class="cart-btn">
+          🛒
+          <span id="cart-count" class="cart-badge">0</span>
+        </a>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<style>
+.site-header {
+  background: #FFF5F5;
+  border-bottom: 1px solid #e0e0e0;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.nav-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 15px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav-menu {
+  display: flex;
+  gap: 30px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  align-items: center;
+}
+
+.nav-menu li a {
+  text-decoration: none;
+  color: #333;
+  font-weight: 500;
+  font-size: 16px;
+  padding: 8px 12px;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+}
+
+.nav-menu li a:hover {
+  color: #8B4513;
+  background: #fce4ec;
+}
+
+.nav-menu li a.active {
+  color: #8B4513;
+  font-weight: 600;
+}
+
+.nav-actions {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+.user-menu {
+  position: relative;
+}
+
+.user-btn {
+  background: transparent;
+  border: none;
+  color: #333;
+  font-size: 16px;
+  cursor: pointer;
+  padding: 8px 12px;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+}
+
+.user-btn:hover {
+  background: #fce4ec;
+  color: #8B4513;
+}
+
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  margin-top: 8px;
+  min-width: 180px;
+}
+
+.dropdown-menu.show {
+  display: block;
+}
+
+.dropdown-menu a {
+  display: block;
+  padding: 12px 20px;
+  color: #333;
+  text-decoration: none;
+  transition: background 0.2s ease;
+}
+
+.dropdown-menu a:hover {
+  background: #fce4ec;
+  color: #8B4513;
+}
+
+.cart-btn {
+  position: relative;
+  background: #8B4513;
+  color: white;
+  border: none;
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.cart-btn:hover {
+  background: #6d3410;
+  transform: scale(1.1);
+}
+
+.cart-badge {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  background: #ff4757;
+  color: white;
+  border-radius: 50%;
+  width: 22px;
+  height: 22px;
+  font-size: 12px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Menu mobile */
+@media (max-width: 968px) {
+  .nav-menu {
+    display: none;
+    flex-direction: column;
+    gap: 10px;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: #FFF5F5;
+    padding: 20px;
+    border-top: 1px solid #e0e0e0;
+  }
+  
+  .nav-menu.mobile-open {
+    display: flex;
+  }
+  
+  .nav-container {
+    position: relative;
+  }
+}
+</style>
+
+<script>
+// Gérer le compteur panier (localStorage)
+function updateCartCount() {
+  const cart = JSON.parse(localStorage.getItem('cart') || '[]');
+  const count = cart.reduce((sum, item) => sum + item.quantity, 0);
+  document.getElementById('cart-count').textContent = count;
+}
+
+// Ajouter au panier
+function addToCart(product) {
+  let cart = JSON.parse(localStorage.getItem('cart') || '[]');
+  
+  const existing = cart.find(item => item.slug === product.slug);
+  if (existing) {
+    existing.quantity += product.quantity;
+  } else {
+    cart.push(product);
+  }
+  
+  localStorage.setItem('cart', JSON.stringify(cart));
+  updateCartCount();
+  
+  alert('✅ Produit ajouté au panier !');
+}
+
+// Initialiser au chargement
+updateCartCount();
+</script>

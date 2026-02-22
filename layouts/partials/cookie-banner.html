@@ -1,0 +1,31 @@
+<!-- Bannière Cookies RGPD -->
+<div id="cookie-banner" style="display: none; position: fixed; bottom: 0; left: 0; right: 0; background: rgba(0,0,0,0.9); color: white; padding: 20px; z-index: 9999; text-align: center;">
+  <div style="max-width: 1200px; margin: 0 auto;">
+    <p style="margin-bottom: 15px;">
+      🍪 Ce site utilise des cookies pour améliorer votre expérience et analyser le trafic.
+    </p>
+    <button onclick="acceptCookies()" style="padding: 10px 30px; background: #8B4513; color: white; border: none; border-radius: 25px; cursor: pointer; font-weight: 600; margin-right: 10px;">Accepter</button>
+    <button onclick="refuseCookies()" style="padding: 10px 30px; background: transparent; color: white; border: 2px solid white; border-radius: 25px; cursor: pointer; font-weight: 600;">Refuser</button>
+  </div>
+</div>
+
+<script>
+window.addEventListener('DOMContentLoaded', function() {
+  if (!localStorage.getItem('cookieConsent')) {
+    document.getElementById('cookie-banner').style.display = 'block';
+  }
+});
+
+function acceptCookies() {
+  localStorage.setItem('cookieConsent', 'accepted');
+  document.getElementById('cookie-banner').style.display = 'none';
+  if (typeof gtag !== 'undefined') {
+    gtag('consent', 'update', {'analytics_storage': 'granted'});
+  }
+}
+
+function refuseCookies() {
+  localStorage.setItem('cookieConsent', 'refused');
+  document.getElementById('cookie-banner').style.display = 'none';
+}
+</script>

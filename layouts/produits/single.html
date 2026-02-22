@@ -54,10 +54,11 @@
       <!-- Sélection taille -->
       <div class="product-options">
         <label class="option-label">Taille *</label>
-        <select class="option-select">
-          <option>Sélectionner</option>
-          <option>Taille 1 (0-6 mois)</option>
-          <option>Taille 2 (6-12 mois)</option>
+        <select id="sizeSelect" class="option-select">
+          <option value="">Sélectionner</option>
+          {{ range .Params.variants }}
+          <option value="{{ . }}">{{ . }}</option>
+          {{ end }}
         </select>
       </div>
 
@@ -72,7 +73,7 @@
       </div>
 
       <!-- Bouton Ajouter au panier -->
-      <button class="btn-add-cart">Ajouter au panier</button>
+      <button class="btn-add-cart" onclick="addToCartFromProduct()">Ajouter au panier</button>
 
       <!-- Paiement direct -->
       <div class="direct-payment">
@@ -363,6 +364,45 @@ function changeQty(delta) {
   if (val < 1) val = 1;
   if (val > 10) val = 10;
   input.value = val;
+}
+
+function addToCartFromProduct() {
+  const size = document.getElementById('sizeSelect').value;
+  const qty = parseInt(document.getElementById('qtyInput').value);
+  
+  if (!size) {
+    alert('⚠️ Veuillez sélectionner une taille');
+    return;
+  }
+  
+  const product = {
+    slug: '{{ .File.BaseFileName }}',
+    title: '{{ .Title }}',
+    price: {{ .Params.price }},
+    image: '{{ index .Params.images 0 }}',
+    size: size,
+    quantity: qty
+  };
+  
+  let cart = JSON.parse(localStorage.getItem('cart') || '[]');
+  
+  // Vérifier si produit avec même taille existe
+  const existing = cart.find(item => item.slug === product.slug && item.size === product.size);
+  
+  if (existing) {
+    existing.quantity += qty;
+  } else {
+    cart.push(product);
+  }
+  
+  localStorage.setItem('cart', JSON.stringify(cart));
+  
+  // Mettre à jour le compteur
+  if (typeof updateCartCount === 'function') {
+    updateCartCount();
+  }
+  
+  alert('✅ Produit ajouté au panier !');
 }
 </script>
 {{ end }}

@@ -1,0 +1,213 @@
+{{ define "main" }}
+<style>
+  .blog-single-container {
+    background-color: #f4d4c8;
+    min-height: 100vh;
+    padding: 2rem 0;
+  }
+  
+  .blog-single-content {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 1rem;
+  }
+  
+  .blog-single-card {
+    background: white;
+    border-radius: 8px;
+    padding: 3rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  }
+  
+  .blog-single-title {
+    font-family: 'Georgia', 'Times New Roman', serif;
+    font-size: 2.5rem;
+    color: #5c3d2e;
+    margin-bottom: 1rem;
+    font-weight: normal;
+    line-height: 1.3;
+  }
+  
+  .blog-single-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 1.5rem;
+    margin-bottom: 2rem;
+    border-bottom: 1px solid #eee;
+    font-size: 0.9rem;
+    color: #666;
+  }
+  
+  .blog-single-date {
+    font-style: italic;
+  }
+  
+  .blog-single-interactions {
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+  }
+  
+  .like-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 1rem;
+    color: #666;
+    padding: 0.5rem 1rem;
+    transition: all 0.2s;
+    border-radius: 20px;
+  }
+  
+  .like-button:hover {
+    background-color: #ffe5e5;
+    color: #e74c3c;
+  }
+  
+  .like-button.liked {
+    color: #e74c3c;
+    background-color: #ffe5e5;
+  }
+  
+  .like-button .heart {
+    font-size: 1.5rem;
+  }
+  
+  .blog-single-body {
+    line-height: 1.8;
+    color: #333;
+  }
+  
+  .blog-single-body h2 {
+    font-family: 'Georgia', 'Times New Roman', serif;
+    color: #5c3d2e;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+  }
+  
+  .blog-back-link {
+    display: inline-block;
+    margin-bottom: 2rem;
+    color: #5c3d2e;
+    text-decoration: none;
+    font-size: 1rem;
+  }
+  
+  .blog-back-link:hover {
+    text-decoration: underline;
+  }
+  
+  @media (max-width: 768px) {
+    .blog-single-card {
+      padding: 1.5rem;
+    }
+    
+    .blog-single-title {
+      font-size: 2rem;
+    }
+    
+    .blog-single-meta {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 1rem;
+    }
+  }
+</style>
+
+<div class="blog-single-container">
+  <div class="blog-single-content">
+    <a href="/blog/" class="blog-back-link">← Retour au blog</a>
+    
+    <div class="blog-single-card">
+      <h1 class="blog-single-title">{{ .Title }}</h1>
+      
+      <div class="blog-single-body">
+        {{ .Content }}
+      </div>
+      
+      <div class="blog-single-meta" style="margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid #eee; border-bottom: none; padding-bottom: 0;">
+        <span class="blog-single-date">{{ .Date.Format "2 January 2006" }}</span>
+        <div class="blog-single-interactions">
+          <span>{{ with .Params.comments }}{{ . }}{{ else }}0{{ end }} commentaire{{ if ne .Params.comments 1 }}s{{ end }}</span>
+          <button class="like-button" data-post-id="{{ .File.UniqueID }}" data-initial-likes="{{ with .Params.likes }}{{ . }}{{ else }}1{{ end }}">
+            <span class="like-count">{{ with .Params.likes }}{{ . }}{{ else }}1{{ end }}</span>
+            <span class="heart">❤</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Gestion des likes sur la page d'article individuel avec API globale
+  document.addEventListener('DOMContentLoaded', function() {
+    const likeButton = document.querySelector('.like-button');
+    
+    if (likeButton) {
+      const postId = likeButton.dataset.postId;
+      const initialLikes = parseInt(likeButton.dataset.initialLikes);
+      
+      // Charger les likes globaux depuis l'API
+      fetchLikes(postId, likeButton);
+      
+      // Charger l'état "liked" depuis localStorage
+      const hasLiked = localStorage.getItem(`blog-liked-${postId}`) === 'true';
+      if (hasLiked) {
+        likeButton.classList.add('liked');
+      }
+      
+      // Gérer le clic
+      likeButton.addEventListener('click', function() {
+        toggleLike(postId, likeButton);
+      });
+    }
+  });
+  
+  async function fetchLikes(postId, button) {
+    try {
+      const response = await fetch(`/.netlify/functions/likes?postId=${postId}`);
+      if (response.ok) {
+        const data = await response.json();
+        const likeCount = button.querySelector('.like-count');
+        likeCount.textContent = data.likes;
+      }
+    } catch (error) {
+      console.error('Erreur chargement likes:', error);
+    }
+  }
+  
+  async function toggleLike(postId, button) {
+    const likeCount = button.querySelector('.like-count');
+    const hasLiked = button.classList.contains('liked');
+    const action = hasLiked ? 'unlike' : 'like';
+    
+    try {
+      const response = await fetch('/.netlify/functions/likes?postId=' + postId, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ action })
+      });
+      
+      if (response.ok) {
+        const data = await response.json();
+        likeCount.textContent = data.likes;
+        
+        if (hasLiked) {
+          button.classList.remove('liked');
+          localStorage.setItem(`blog-liked-${postId}`, 'false');
+        } else {
+          button.classList.add('liked');
+          localStorage.setItem(`blog-liked-${postId}`, 'true');
+        }
+      }
+    } catch (error) {
+      console.error('Erreur toggle like:', error);
+    }
+  }
+</script>
+{{ end }}

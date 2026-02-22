@@ -1,0 +1,28 @@
+{
+  "questions": [
+    {
+      "id": "portage-pour-moi",
+      "question": "Un atelier de portage, est ce fait pour moi ?",
+      "answer": "Oui ! Que vous soyez enceinte, parent d'un nouveau-né ou d'un enfant plus grand, un atelier de portage vous permet d'apprendre les techniques sécuritaires et confortables pour porter votre bébé.",
+      "order": 1
+    },
+    {
+      "id": "reserver-dos-sans-experience",
+      "question": "Puis je réserver un atelier portage dos si je n'ai jamais porté ?",
+      "answer": "Oui cela est possible mais cette technique reste compliquée pour des personnes n'ayant jamais pratiqué le portage. Je conseille donc de faire d'abord un atelier \"portage découverte\", de s'entraîner à la maison puis de faire un atelier de portage dos.",
+      "order": 2
+    },
+    {
+      "id": "reserver-avance-sans-experience",
+      "question": "Puis je réserver un atelier portage avancé si je n'ai jamais porté ?",
+      "answer": "Il est préférable d'avoir déjà pratiqué le portage avant de réserver cet atelier avancé.",
+      "order": 3
+    },
+    {
+      "id": "monitrice-formee",
+      "question": "La monitrice est elle formée au portage physiologique ?",
+      "answer": "Oui, j'ai suivi une formation certifiante de consultante en portage bébé. Cette formation intensive de 4 jours couvre théorie et pratique du portage physiologique.",
+      "order": 4
+    }
+  ]
+}

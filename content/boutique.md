@@ -170,7 +170,184 @@ featured_image: ""
 .paypal-btn:hover {
   background: #005A94;
 }
+
+/* Modal sélection taille */
+.size-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0,0,0,0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.size-modal-content {
+  background: white;
+  border-radius: 16px;
+  padding: 40px;
+  max-width: 500px;
+  width: 90%;
+  text-align: center;
+  animation: slideUp 0.3s ease;
+}
+
+@keyframes slideUp {
+  from { transform: translateY(50px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+.size-modal-content h3 {
+  font-size: 24px;
+  margin-bottom: 15px;
+  color: #333;
+}
+
+.modal-product-name {
+  color: #666;
+  margin-bottom: 30px;
+  font-size: 16px;
+}
+
+.size-options {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+  margin-bottom: 25px;
+}
+
+.size-option {
+  padding: 18px;
+  border: 2px solid #ddd;
+  background: white;
+  border-radius: 10px;
+  font-size: 16px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.size-option:hover {
+  border-color: #8B4513;
+  background: #FFF5F5;
+  transform: scale(1.05);
+}
+
+.modal-close {
+  width: 100%;
+  padding: 12px;
+  background: #f5f5f5;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  color: #666;
+}
+
+.modal-close:hover {
+  background: #e0e0e0;
+}
 </style>
+
+<script>
+function addToCartFromGrid(slug, title, price, image) {
+  const product = {
+    slug: slug,
+    title: title,
+    price: price,
+    image: image,
+    quantity: 1,
+    size: 'À sélectionner'
+  };
+  
+  let cart = JSON.parse(localStorage.getItem('cart') || '[]');
+  const existing = cart.find(item => item.slug === slug);
+  
+  if (existing) {
+    existing.quantity += 1;
+  } else {
+    cart.push(product);
+  }
+  
+  localStorage.setItem('cart', JSON.stringify(cart));
+  updateCartCount();
+  
+  alert('✅ Produit ajouté au panier !');
+}
+
+function showSizeModal(slug, title, price, image, sizes) {
+  const modal = document.createElement('div');
+  modal.className = 'size-modal';
+  modal.innerHTML = `
+    <div class="size-modal-content">
+      <h3>Sélectionnez une taille</h3>
+      <p class="modal-product-name">${title} - ${price.toFixed(2)}€</p>
+      <div class="size-options">
+        ${sizes.map(size => `
+          <button class="size-option" onclick="addToCartWithSize('${slug}', '${title}', ${price}, '${image}', '${size}')">${size}</button>
+        `).join('')}
+      </div>
+      <button class="modal-close" onclick="this.closest('.size-modal').remove()">✕ Annuler</button>
+    </div>
+  `;
+  document.body.appendChild(modal);
+  
+  // Fermer si clic en dehors
+  modal.addEventListener('click', function(e) {
+    if (e.target === modal) {
+      modal.remove();
+    }
+  });
+}
+
+function addToCartWithSize(slug, title, price, image, size) {
+  const product = {
+    slug: slug,
+    title: title,
+    price: price,
+    image: image,
+    size: size,
+    quantity: 1
+  };
+  
+  let cart = JSON.parse(localStorage.getItem('cart') || '[]');
+  const existing = cart.find(item => item.slug === slug && item.size === size);
+  
+  if (existing) {
+    existing.quantity += 1;
+  } else {
+    cart.push(product);
+  }
+  
+  localStorage.setItem('cart', JSON.stringify(cart));
+  updateCartCount();
+  
+  // Fermer la modale
+  document.querySelector('.size-modal').remove();
+  
+  alert('✅ Produit ajouté au panier !');
+}
+
+function updateCartCount() {
+  const cart = JSON.parse(localStorage.getItem('cart') || '[]');
+  const count = cart.reduce((sum, item) => sum + item.quantity, 0);
+  const badge = document.getElementById('cart-count');
+  if (badge) {
+    badge.textContent = count;
+  }
+}
+
+updateCartCount();
+</script>
 
 <div class="shop-header">
   <h1>Boutique</h1>
@@ -181,7 +358,7 @@ featured_image: ""
 
 <!-- Produit 1 -->
 <div class="product-card">
-  <a href="/produits/sarouel-pommes/">
+  <a href="/produits/sarouel-pommes/" class="product-link">
     <div class="product-badge badge-rupture">Bientôt en rupture</div>
     <img src="/images/produits/sarouel-pommes-1.jpg" alt="Sarouel évolutif chaud motif pommes" class="product-image">
     <div class="product-info">
@@ -192,137 +369,138 @@ featured_image: ""
     </div>
   </a>
   <div class="product-info">
-    <button class="add-to-cart" onclick="window.location.href='/produits/sarouel-pommes/'">Voir le produit</button>
+    <button class="add-to-cart" onclick="event.stopPropagation(); showSizeModal('sarouel-pommes', 'Sarouel évolutif chaud motif pommes', 14.00, '/images/produits/sarouel-pommes-1.jpg', ['Taille 1 (0-6 mois)', 'Taille 2 (6-12 mois)'])">Ajouter au panier</button>
   </div>
 </div>
 
 <!-- Produit 2 -->
 <div class="product-card">
-  <div class="product-badge badge-destockage">Déstockage</div>
-  <img src="/images/produits/sarouel-fleurs-1.jpg" alt="Sarouel évolutif très chaud fleurs" class="product-image">
+  <a href="/produits/sarouel-fleurs/" class="product-link">
+    <div class="product-badge badge-destockage">Déstockage</div>
+    <img src="/images/produits/sarouel-fleurs-1.jpg" alt="Sarouel évolutif très chaud fleurs" class="product-image">
+    <div class="product-info">
+      <div class="product-title">Sarouel évolutif très chaud fleurs</div>
+      <div class="product-price">
+        <span class="price-old">20,00€</span> 14,00€
+      </div>
+    </div>
+  </a>
   <div class="product-info">
-    <div class="product-title">Sarouel évolutif très chaud fleurs</div>
-    <div class="product-price">
-      <span class="price-old">20,00€</span> 14,00€
-    </div>
-    <button class="add-to-cart" onclick="alert('Contactez-nous pour commander')">Ajouter au panier</button>
-    <div class="payment-options">
-      <a href="https://buy.stripe.com/VOTRE-LIEN-FLEURS" class="payment-btn stripe-btn" target="_blank">💳 Stripe</a>
-      <a href="https://www.paypal.com/paypalme/VOTRE-LIEN/14" class="payment-btn paypal-btn" target="_blank">💰 PayPal</a>
-    </div>
+    <button class="add-to-cart" onclick="event.stopPropagation(); showSizeModal('sarouel-fleurs', 'Sarouel évolutif très chaud fleurs', 14.00, '/images/produits/sarouel-fleurs-1.jpg', ['Taille 1 (0-6 mois)', 'Taille 2 (6-12 mois)', 'Taille 3 (12-18 mois)'])">Ajouter au panier</button>
   </div>
 </div>
 
 <!-- Produit 3 -->
 <div class="product-card">
-  <img src="/images/produits/sarouel-dispo-1.jpg" alt="Sarouel évolutif disponibilité immédiate" class="product-image">
-  <div class="product-info">
-    <div class="product-title">Sarouel évolutif disponibilité immédiate</div>
-    <div class="product-price">15,00€</div>
-    <button class="add-to-cart" onclick="alert('Contactez-nous pour commander')">Ajouter au panier</button>
-    <div class="payment-options">
-      <a href="https://buy.stripe.com/VOTRE-LIEN-DISPO" class="payment-btn stripe-btn" target="_blank">💳 Stripe</a>
-      <a href="https://www.paypal.com/paypalme/VOTRE-LIEN/15" class="payment-btn paypal-btn" target="_blank">💰 PayPal</a>
+  <a href="/produits/sarouel-dispo/" class="product-link">
+    <div class="product-badge badge-rupture-partielle">Rupture partielle</div>
+    <img src="/images/produits/sarouel-dispo-1.jpg" alt="Sarouel évolutif disponibilité immédiate" class="product-image">
+    <div class="product-info">
+      <div class="product-title">Sarouel évolutif disponibilité immédiate</div>
+      <div class="product-price">15,00€</div>
     </div>
+  </a>
+  <div class="product-info">
+    <button class="add-to-cart" onclick="event.stopPropagation(); showSizeModal('sarouel-dispo', 'Sarouel évolutif disponibilité immédiate', 15.00, '/images/produits/sarouel-dispo-1.jpg', ['Taille 1', 'Taille 2', 'Taille 3', 'Taille 4'])">Ajouter au panier</button>
   </div>
 </div>
 
 <!-- Produit 4 -->
 <div class="product-card">
-  <div class="product-badge badge-stock-limite">Stock limité</div>
-  <img src="/images/produits/pack-xs-1.jpg" alt="Méga pack taille XS" class="product-image">
-  <div class="product-info">
-    <div class="product-title">Méga pack taille XS</div>
-    <div class="product-price">88,00€</div>
-    <button class="add-to-cart" onclick="alert('Contactez-nous pour commander')">Ajouter au panier</button>
-    <div class="payment-options">
-      <a href="https://buy.stripe.com/VOTRE-LIEN-PACK-XS" class="payment-btn stripe-btn" target="_blank">💳 Stripe</a>
-      <a href="https://www.paypal.com/paypalme/VOTRE-LIEN/88" class="payment-btn paypal-btn" target="_blank">💰 PayPal</a>
+  <a href="/produits/sarouel-dispo2/" class="product-link">
+    <img src="/images/produits/sarouel-dispo2-1.jpg" alt="Sarouel évolutif disponibilité immédiate v2" class="product-image">
+    <div class="product-info">
+      <div class="product-title">Sarouel évolutif disponibilité immédiate</div>
+      <div class="product-price">15,00€</div>
     </div>
+  </a>
+  <div class="product-info">
+    <button class="add-to-cart" onclick="event.stopPropagation(); showSizeModal('sarouel-dispo2', 'Sarouel évolutif disponibilité immédiate', 15.00, '/images/produits/sarouel-dispo2-1.jpg', ['Taille 1', 'Taille 2', 'Taille 3', 'Taille 4'])">Ajouter au panier</button>
   </div>
 </div>
 
 <!-- Produit 5 -->
 <div class="product-card">
-  <img src="/images/produits/pack-s-1.jpg" alt="Méga pack taille S" class="product-image">
-  <div class="product-info">
-    <div class="product-title">Méga pack taille S</div>
-    <div class="product-price">90,00€</div>
-    <button class="add-to-cart" onclick="alert('Contactez-nous pour commander')">Ajouter au panier</button>
-    <div class="payment-options">
-      <a href="https://buy.stripe.com/VOTRE-LIEN-PACK-S" class="payment-btn stripe-btn" target="_blank">💳 Stripe</a>
-      <a href="https://www.paypal.com/paypalme/VOTRE-LIEN/90" class="payment-btn paypal-btn" target="_blank">💰 PayPal</a>
+  <a href="/produits/pack-s/" class="product-link">
+    <img src="/images/produits/pack-s-1.jpg" alt="Méga pack taille S" class="product-image">
+    <div class="product-info">
+      <div class="product-title">Méga pack taille S</div>
+      <div class="product-price">90,00€</div>
     </div>
+  </a>
+  <div class="product-info">
+    <button class="add-to-cart" onclick="event.stopPropagation(); showSizeModal('pack-s', 'Méga pack taille S', 90.00, '/images/produits/pack-s-1.jpg', ['Modèle A', 'Modèle B', 'Modèle C'])">Ajouter au panier</button>
   </div>
 </div>
 
 <!-- Produit 6 -->
 <div class="product-card">
-  <img src="/images/produits/pack-m-1.jpg" alt="Méga pack taille M" class="product-image">
-  <div class="product-info">
-    <div class="product-title">Méga pack taille M</div>
-    <div class="product-price">95,00€</div>
-    <button class="add-to-cart" onclick="alert('Contactez-nous pour commander')">Ajouter au panier</button>
-    <div class="payment-options">
-      <a href="https://buy.stripe.com/VOTRE-LIEN-PACK-M" class="payment-btn stripe-btn" target="_blank">💳 Stripe</a>
-      <a href="https://www.paypal.com/paypalme/VOTRE-LIEN/95" class="payment-btn paypal-btn" target="_blank">💰 PayPal</a>
+  <a href="/produits/pack-xs/" class="product-link">
+    <div class="product-badge badge-stock-limite">Stock limité</div>
+    <img src="/images/produits/pack-xs-1.jpg" alt="Méga pack taille XS" class="product-image">
+    <div class="product-info">
+      <div class="product-title">Méga pack taille XS</div>
+      <div class="product-price">88,00€</div>
     </div>
+  </a>
+  <div class="product-info">
+    <button class="add-to-cart" onclick="event.stopPropagation(); showSizeModal('pack-xs', 'Méga pack taille XS', 88.00, '/images/produits/pack-xs-1.jpg', ['Modèle A', 'Modèle B', 'Modèle C'])">Ajouter au panier</button>
   </div>
 </div>
 
 <!-- Produit 7 -->
 <div class="product-card">
-  <img src="/images/produits/pack-l-1.jpg" alt="Méga pack taille L" class="product-image">
-  <div class="product-info">
-    <div class="product-title">Méga pack taille L</div>
-    <div class="product-price">100,00€</div>
-    <button class="add-to-cart" onclick="alert('Contactez-nous pour commander')">Ajouter au panier</button>
-    <div class="payment-options">
-      <a href="https://buy.stripe.com/VOTRE-LIEN-PACK-L" class="payment-btn stripe-btn" target="_blank">💳 Stripe</a>
-      <a href="https://www.paypal.com/paypalme/VOTRE-LIEN/100" class="payment-btn paypal-btn" target="_blank">💰 PayPal</a>
+  <a href="/produits/pack-m/" class="product-link">
+    <img src="/images/produits/pack-m-1.jpg" alt="Méga pack taille M" class="product-image">
+    <div class="product-info">
+      <div class="product-title">Méga pack taille M</div>
+      <div class="product-price">95,00€</div>
     </div>
+  </a>
+  <div class="product-info">
+    <button class="add-to-cart" onclick="event.stopPropagation(); showSizeModal('pack-m', 'Méga pack taille M', 95.00, '/images/produits/pack-m-1.jpg', ['Modèle A', 'Modèle B', 'Modèle C'])">Ajouter au panier</button>
   </div>
 </div>
 
 <!-- Produit 8 -->
 <div class="product-card">
-  <img src="/images/produits/preplates-xs-1.jpg" alt="Pack 100% préplates taille XS" class="product-image">
-  <div class="product-info">
-    <div class="product-title">Pack 100% préplates taille XS</div>
-    <div class="product-price">60,00€</div>
-    <button class="add-to-cart" onclick="alert('Contactez-nous pour commander')">Ajouter au panier</button>
-    <div class="payment-options">
-      <a href="https://buy.stripe.com/VOTRE-LIEN-PREPLATES-XS" class="payment-btn stripe-btn" target="_blank">💳 Stripe</a>
-      <a href="https://www.paypal.com/paypalme/VOTRE-LIEN/60" class="payment-btn paypal-btn" target="_blank">💰 PayPal</a>
+  <a href="/produits/pack-l/" class="product-link">
+    <img src="/images/produits/pack-l-1.jpg" alt="Méga pack taille L" class="product-image">
+    <div class="product-info">
+      <div class="product-title">Méga pack taille L</div>
+      <div class="product-price">100,00€</div>
     </div>
+  </a>
+  <div class="product-info">
+    <button class="add-to-cart" onclick="event.stopPropagation(); showSizeModal('pack-l', 'Méga pack taille L', 100.00, '/images/produits/pack-l-1.jpg', ['Modèle A', 'Modèle B', 'Modèle C'])">Ajouter au panier</button>
   </div>
 </div>
 
 <!-- Produit 9 -->
 <div class="product-card">
-  <img src="/images/produits/preplates-s-1.jpg" alt="Pack 100% préplates taille S" class="product-image">
-  <div class="product-info">
-    <div class="product-title">Pack 100% préplates taille S</div>
-    <div class="product-price">62,00€</div>
-    <button class="add-to-cart" onclick="alert('Contactez-nous pour commander')">Ajouter au panier</button>
-    <div class="payment-options">
-      <a href="https://buy.stripe.com/VOTRE-LIEN-PREPLATES-S" class="payment-btn stripe-btn" target="_blank">💳 Stripe</a>
-      <a href="https://www.paypal.com/paypalme/VOTRE-LIEN/62" class="payment-btn paypal-btn" target="_blank">💰 PayPal</a>
+  <a href="/produits/preplates-xs/" class="product-link">
+    <img src="/images/produits/preplates-xs-1.jpg" alt="Pack 100% préplates taille XS" class="product-image">
+    <div class="product-info">
+      <div class="product-title">Pack 100% préplates taille XS</div>
+      <div class="product-price">60,00€</div>
     </div>
+  </a>
+  <div class="product-info">
+    <button class="add-to-cart" onclick="event.stopPropagation(); showSizeModal('preplates-xs', 'Pack 100% préplates taille XS', 60.00, '/images/produits/preplates-xs-1.jpg', ['Pack complet'])">Ajouter au panier</button>
   </div>
 </div>
 
 <!-- Produit 10 -->
 <div class="product-card">
-  <img src="/images/produits/sarouel-dispo2-1.jpg" alt="Sarouel évolutif disponibilité immédiate v2" class="product-image">
-  <div class="product-info">
-    <div class="product-title">Sarouel évolutif disponibilité immédiate</div>
-    <div class="product-price">15,00€</div>
-    <button class="add-to-cart" onclick="alert('Contactez-nous pour commander')">Ajouter au panier</button>
-    <div class="payment-options">
-      <a href="https://buy.stripe.com/VOTRE-LIEN-DISPO2" class="payment-btn stripe-btn" target="_blank">💳 Stripe</a>
-      <a href="https://www.paypal.com/paypalme/VOTRE-LIEN/15" class="payment-btn paypal-btn" target="_blank">💰 PayPal</a>
+  <a href="/produits/preplates-s/" class="product-link">
+    <img src="/images/produits/preplates-s-1.jpg" alt="Pack 100% préplates taille S" class="product-image">
+    <div class="product-info">
+      <div class="product-title">Pack 100% préplates taille S</div>
+      <div class="product-price">62,00€</div>
     </div>
+  </a>
+  <div class="product-info">
+    <button class="add-to-cart" onclick="event.stopPropagation(); showSizeModal('preplates-s', 'Pack 100% préplates taille S', 62.00, '/images/produits/preplates-s-1.jpg', ['Pack complet'])">Ajouter au panier</button>
   </div>
 </div>
 
