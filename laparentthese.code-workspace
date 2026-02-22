@@ -1,0 +1,44 @@
+{
+  "folders": [
+    {
+      "path": "."
+    }
+  ],
+  "settings": {
+    "terminal.integrated.defaultProfile.windows": "PowerShell",
+    "files.autoSave": "afterDelay",
+    "files.autoSaveDelay": 1000
+  },
+  "tasks": {
+    "version": "2.0.0",
+    "tasks": [
+      {
+        "label": "🚀 Lancer Hugo Server",
+        "type": "shell",
+        "command": "hugo server -D --navigateToChanged",
+        "isBackground": true,
+        "problemMatcher": [],
+        "presentation": {
+          "echo": true,
+          "reveal": "always",
+          "focus": false,
+          "panel": "dedicated",
+          "showReuseMessage": false,
+          "clear": true
+        }
+      },
+      {
+        "label": "🔨 Build Hugo",
+        "type": "shell",
+        "command": "hugo",
+        "problemMatcher": []
+      },
+      {
+        "label": "📤 Deploy (Build + Push)",
+        "type": "shell",
+        "command": "hugo && git add . && git commit -m 'Update site' && git push",
+        "problemMatcher": []
+      }
+    ]
+  }
+}
