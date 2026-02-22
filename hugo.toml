@@ -1,17 +1,14 @@
 baseURL = 'https://michaeljaniaut-dot.github.io/la.parent.these/'
 languageCode = 'fr-fr'
 title = 'La Parent These'
-theme = 'book'
+theme = 'ananke'
 
 [params]
-  BookTheme = 'light'
-  BookToC = true
-  BookSearch = true
-  BookMenuBundle = '/menu'
-  BookSection = '*'
-  
-[params.BookComments]
-  enabled = false
+  description = 'Accompagnement perinatal, ateliers de portage physiologique, consultation sommeil'
+  favicon = ''
+  featured_image = '/images/hero.jpg'
+  background_color_class = 'bg-light-blue'
+  recent_posts_number = 3
   
 [[params.ananke_socials]]
   name = 'facebook'
