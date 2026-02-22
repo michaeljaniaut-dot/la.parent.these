@@ -4,197 +4,319 @@ description: "Sarouels evolutifs et produits pour bebes"
 featured_image: ""
 ---
 
-# Boutique
+<style>
+.shop-header {
+  text-align: center;
+  padding: 40px 20px;
+  background: linear-gradient(135deg, #fce4ec 0%, #f8bbd0 100%);
+  margin-bottom: 40px;
+  border-radius: 12px;
+}
 
-Découvrez notre sélection de vêtements évolutifs pour bébés et enfants.
+.shop-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
 
-**🎁 Frais de port offerts dès 60€ de commande. Profitez-en !**
+.product-card {
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
+}
 
----
+.product-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+}
 
-## Sarouels Évolutifs
+.product-badge {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 14px;
+  color: white;
+  z-index: 10;
+}
 
-### Sarouel Évolutif Chaud Motif Pommes
-**Prix :** ~~20,00€~~ **14,00€**  
-**Variantes :** 2 variantes disponibles  
-**Stock :** ✅ En stock  
-🔥 **Promotion en cours**
+.badge-rupture {
+  background-color: #8B4513;
+}
 
-{{< gallery images="/images/produits/sarouel-pommes-1.jpg, /images/produits/sarouel-pommes-2.jpg, /images/produits/sarouel-pommes-3.jpg" >}}
+.badge-destockage {
+  background-color: #D2691E;
+}
 
-Sarouel évolutif en tissu chaud, parfait pour l'hiver. Motif pommes adorable.
+.badge-stock-limite {
+  background-color: #CD853F;
+}
 
-<div class="payment-buttons-group">
-{{< stripe stripe_url="https://buy.stripe.com/VOTRE-LIEN-ICI" >}}
-{{< paypal paypal_url="https://www.paypal.com/paypalme/VOTRE-LIEN-ICI/14" >}}
+.product-image {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  background: #f5f5f5;
+}
+
+.product-info {
+  padding: 20px;
+  background: #FFF5F5;
+}
+
+.product-title {
+  font-size: 16px;
+  font-weight: 500;
+  color: #8B4513;
+  margin-bottom: 10px;
+  min-height: 40px;
+}
+
+.product-price {
+  font-size: 18px;
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 15px;
+}
+
+.price-old {
+  text-decoration: line-through;
+  color: #999;
+  font-size: 16px;
+  margin-right: 8px;
+}
+
+.add-to-cart {
+  width: 100%;
+  padding: 12px 20px;
+  background-color: transparent;
+  border: 2px solid #8B4513;
+  border-radius: 25px;
+  color: #8B4513;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 15px;
+}
+
+.add-to-cart:hover {
+  background-color: #8B4513;
+  color: white;
+}
+
+.payment-options {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.payment-btn {
+  flex: 1;
+  padding: 10px;
+  border-radius: 20px;
+  text-align: center;
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.stripe-btn {
+  background: #635BFF;
+  color: white;
+}
+
+.stripe-btn:hover {
+  background: #5147E5;
+}
+
+.paypal-btn {
+  background: #0070BA;
+  color: white;
+}
+
+.paypal-btn:hover {
+  background: #005A94;
+}
+
+@media (max-width: 968px) {
+  .shop-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+}
+
+@media (max-width: 640px) {
+  .shop-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+}
+</style>
+
+<div class="shop-header">
+  <h1>Boutique</h1>
+  <p>🎁 Frais de port offerts dès 60€ de commande. Profitez-en !</p>
 </div>
 
-**Ou [Commander par email](/contact/)**
+<div class="shop-grid">
 
----
-
-### Sarouel Évolutif Très Chaud Fleurs
-**Prix :** ~~20,00€~~ **14,00€**  
-**Variantes :** 3 variantes disponibles  
-**Stock :** ✅ En stock  
-🏷️ **Déstockage**
-
-{{< gallery images="/images/produits/sarouel-fleurs-1.jpg, /images/produits/sarouel-fleurs-2.jpg, /images/produits/sarouel-fleurs-3.jpg" >}}
-
-Sarouel évolutif extra-chaud avec motif fleuri.
-
-<div class="payment-buttons-group">
-{{< stripe stripe_url="https://buy.stripe.com/VOTRE-LIEN-FLEURS" >}}
-{{< paypal paypal_url="https://www.paypal.com/paypalme/VOTRE-LIEN-ICI/14" >}}
+<!-- Produit 1 -->
+<div class="product-card">
+  <div class="product-badge badge-rupture">Bientôt en rupture</div>
+  <img src="/images/produits/sarouel-pommes-1.jpg" alt="Sarouel évolutif chaud motif pommes" class="product-image">
+  <div class="product-info">
+    <div class="product-title">Sarouel évolutif chaud motif pommes</div>
+    <div class="product-price">
+      <span class="price-old">20,00€</span> 14,00€
+    </div>
+    <button class="add-to-cart" onclick="alert('Contactez-nous pour commander')">Ajouter au panier</button>
+    <div class="payment-options">
+      <a href="https://buy.stripe.com/VOTRE-LIEN-POMMES" class="payment-btn stripe-btn" target="_blank">💳 Stripe</a>
+      <a href="https://www.paypal.com/paypalme/VOTRE-LIEN/14" class="payment-btn paypal-btn" target="_blank">💰 PayPal</a>
+    </div>
+  </div>
 </div>
 
-**Ou [Commander par email](/contact/)**
-
----
-
-### Sarouel Évolutif Disponibilité Immédiate (Variante 1)
-**Prix :** **15,00€**  
-**Variantes :** 4 variantes disponibles  
-**Stock :** ⚠️ En rupture de stock partielle
-
-[Image à ajouter]
-
-Sarouel évolutif disponible pour expédition rapide.
-
-<div class="payment-buttons-group">
-{{< stripe stripe_url="https://buy.stripe.com/VOTRE-LIEN-DISPO1" >}}
-{{< paypal paypal_url="https://www.paypal.com/paypalme/VOTRE-LIEN-ICI/15" >}}
+<!-- Produit 2 -->
+<div class="product-card">
+  <div class="product-badge badge-destockage">Déstockage</div>
+  <img src="/images/produits/sarouel-fleurs-1.jpg" alt="Sarouel évolutif très chaud fleurs" class="product-image">
+  <div class="product-info">
+    <div class="product-title">Sarouel évolutif très chaud fleurs</div>
+    <div class="product-price">
+      <span class="price-old">20,00€</span> 14,00€
+    </div>
+    <button class="add-to-cart" onclick="alert('Contactez-nous pour commander')">Ajouter au panier</button>
+    <div class="payment-options">
+      <a href="https://buy.stripe.com/VOTRE-LIEN-FLEURS" class="payment-btn stripe-btn" target="_blank">💳 Stripe</a>
+      <a href="https://www.paypal.com/paypalme/VOTRE-LIEN/14" class="payment-btn paypal-btn" target="_blank">💰 PayPal</a>
+    </div>
+  </div>
 </div>
 
-**Ou [Commander par email](/contact/)**
-
----
-
-### Sarouel Évolutif Disponibilité Immédiate (Variante 2)
-**Prix :** **15,00€**  
-**Variantes :** 4 variantes disponibles  
-**Stock :** ✅ En stock
-
-[Image à ajouter]
-
-Sarouel évolutif disponible pour expédition rapide.
-
-<div class="payment-buttons-group">
-{{< stripe stripe_url="https://buy.stripe.com/VOTRE-LIEN-DISPO2" >}}
-{{< paypal paypal_url="https://www.paypal.com/paypalme/VOTRE-LIEN-ICI/15" >}}
+<!-- Produit 3 -->
+<div class="product-card">
+  <img src="/images/produits/sarouel-dispo-1.jpg" alt="Sarouel évolutif disponibilité immédiate" class="product-image">
+  <div class="product-info">
+    <div class="product-title">Sarouel évolutif disponibilité immédiate</div>
+    <div class="product-price">15,00€</div>
+    <button class="add-to-cart" onclick="alert('Contactez-nous pour commander')">Ajouter au panier</button>
+    <div class="payment-options">
+      <a href="https://buy.stripe.com/VOTRE-LIEN-DISPO" class="payment-btn stripe-btn" target="_blank">💳 Stripe</a>
+      <a href="https://www.paypal.com/paypalme/VOTRE-LIEN/15" class="payment-btn paypal-btn" target="_blank">💰 PayPal</a>
+    </div>
+  </div>
 </div>
 
-**Ou [Commander par email](/contact/)**
-
----
-
-## Méga Packs
-
-### Méga Pack Taille XS
-**Prix :** **88,00€**  
-**Variantes :** 3 variantes disponibles  
-**Stock :** ✅ En stock
-
-[Image à ajouter]
-
-Pack complet pour les tout-petits.
-
-<div class="payment-buttons-group">
-{{< stripe stripe_url="https://buy.stripe.com/VOTRE-LIEN-PACK-XS" >}}
-{{< paypal paypal_url="https://www.paypal.com/paypalme/VOTRE-LIEN-ICI/88" >}}
+<!-- Produit 4 -->
+<div class="product-card">
+  <div class="product-badge badge-stock-limite">Stock limité</div>
+  <img src="/images/produits/pack-xs-1.jpg" alt="Méga pack taille XS" class="product-image">
+  <div class="product-info">
+    <div class="product-title">Méga pack taille XS</div>
+    <div class="product-price">88,00€</div>
+    <button class="add-to-cart" onclick="alert('Contactez-nous pour commander')">Ajouter au panier</button>
+    <div class="payment-options">
+      <a href="https://buy.stripe.com/VOTRE-LIEN-PACK-XS" class="payment-btn stripe-btn" target="_blank">💳 Stripe</a>
+      <a href="https://www.paypal.com/paypalme/VOTRE-LIEN/88" class="payment-btn paypal-btn" target="_blank">💰 PayPal</a>
+    </div>
+  </div>
 </div>
 
-**Ou [Commander par email](/contact/)**
-
----
-
-### Méga Pack Taille S
-**Prix :** **90,00€**  
-**Variantes :** 3 variantes disponibles  
-**Stock :** ✅ En stock
-
-[Image à ajouter]
-
-Pack complet taille S.
-
-<div class="payment-buttons-group">
-{{< stripe stripe_url="https://buy.stripe.com/VOTRE-LIEN-PACK-S" >}}
-{{< paypal paypal_url="https://www.paypal.com/paypalme/VOTRE-LIEN-ICI/90" >}}
+<!-- Produit 5 -->
+<div class="product-card">
+  <img src="/images/produits/pack-s-1.jpg" alt="Méga pack taille S" class="product-image">
+  <div class="product-info">
+    <div class="product-title">Méga pack taille S</div>
+    <div class="product-price">90,00€</div>
+    <button class="add-to-cart" onclick="alert('Contactez-nous pour commander')">Ajouter au panier</button>
+    <div class="payment-options">
+      <a href="https://buy.stripe.com/VOTRE-LIEN-PACK-S" class="payment-btn stripe-btn" target="_blank">💳 Stripe</a>
+      <a href="https://www.paypal.com/paypalme/VOTRE-LIEN/90" class="payment-btn paypal-btn" target="_blank">💰 PayPal</a>
+    </div>
+  </div>
 </div>
 
-**Ou [Commander par email](/contact/)**
-
----
-
-### Méga Pack Taille M
-**Prix :** **95,00€**  
-**Variantes :** 3 variantes disponibles  
-**Stock :** ✅ En stock
-
-[Image à ajouter]
-
-Pack complet taille M.
-
-<div class="payment-buttons-group">
-{{< stripe stripe_url="https://buy.stripe.com/VOTRE-LIEN-PACK-M" >}}
-{{< paypal paypal_url="https://www.paypal.com/paypalme/VOTRE-LIEN-ICI/95" >}}
+<!-- Produit 6 -->
+<div class="product-card">
+  <img src="/images/produits/pack-m-1.jpg" alt="Méga pack taille M" class="product-image">
+  <div class="product-info">
+    <div class="product-title">Méga pack taille M</div>
+    <div class="product-price">95,00€</div>
+    <button class="add-to-cart" onclick="alert('Contactez-nous pour commander')">Ajouter au panier</button>
+    <div class="payment-options">
+      <a href="https://buy.stripe.com/VOTRE-LIEN-PACK-M" class="payment-btn stripe-btn" target="_blank">💳 Stripe</a>
+      <a href="https://www.paypal.com/paypalme/VOTRE-LIEN/95" class="payment-btn paypal-btn" target="_blank">💰 PayPal</a>
+    </div>
+  </div>
 </div>
 
-**Ou [Commander par email](/contact/)**
-
----
-
-### Méga Pack Taille L
-**Prix :** **100,00€**  
-**Variantes :** 3 variantes disponibles  
-**Stock :** ✅ En stock
-
-[Image à ajouter]
-
-Pack complet taille L.
-
-<div class="payment-buttons-group">
-{{< stripe stripe_url="https://buy.stripe.com/VOTRE-LIEN-PACK-L" >}}
-{{< paypal paypal_url="https://www.paypal.com/paypalme/VOTRE-LIEN-ICI/100" >}}
+<!-- Produit 7 -->
+<div class="product-card">
+  <img src="/images/produits/pack-l-1.jpg" alt="Méga pack taille L" class="product-image">
+  <div class="product-info">
+    <div class="product-title">Méga pack taille L</div>
+    <div class="product-price">100,00€</div>
+    <button class="add-to-cart" onclick="alert('Contactez-nous pour commander')">Ajouter au panier</button>
+    <div class="payment-options">
+      <a href="https://buy.stripe.com/VOTRE-LIEN-PACK-L" class="payment-btn stripe-btn" target="_blank">💳 Stripe</a>
+      <a href="https://www.paypal.com/paypalme/VOTRE-LIEN/100" class="payment-btn paypal-btn" target="_blank">💰 PayPal</a>
+    </div>
+  </div>
 </div>
 
-**Ou [Commander par email](/contact/)**
-
----
-
-## Packs 100% Préplates
-
-### Pack 100% Préplates Taille XS
-**Prix :** **60,00€**  
-**Stock :** ✅ En stock
-
-[Image à ajouter]
-
-Pack complet en préplates pour les plus petits.
-
-<div class="payment-buttons-group">
-{{< stripe stripe_url="https://buy.stripe.com/VOTRE-LIEN-PREPLATES-XS" >}}
-{{< paypal paypal_url="https://www.paypal.com/paypalme/VOTRE-LIEN-ICI/60" >}}
+<!-- Produit 8 -->
+<div class="product-card">
+  <img src="/images/produits/preplates-xs-1.jpg" alt="Pack 100% préplates taille XS" class="product-image">
+  <div class="product-info">
+    <div class="product-title">Pack 100% préplates taille XS</div>
+    <div class="product-price">60,00€</div>
+    <button class="add-to-cart" onclick="alert('Contactez-nous pour commander')">Ajouter au panier</button>
+    <div class="payment-options">
+      <a href="https://buy.stripe.com/VOTRE-LIEN-PREPLATES-XS" class="payment-btn stripe-btn" target="_blank">💳 Stripe</a>
+      <a href="https://www.paypal.com/paypalme/VOTRE-LIEN/60" class="payment-btn paypal-btn" target="_blank">💰 PayPal</a>
+    </div>
+  </div>
 </div>
 
-**Ou [Commander par email](/contact/)**
-
----
-
-### Pack 100% Préplates Taille S
-**Prix :** **62,00€**  
-**Stock :** ✅ En stock
-
-[Image à ajouter]
-
-Pack complet en préplates taille S.
-
-<div class="payment-buttons-group">
-{{< stripe stripe_url="https://buy.stripe.com/VOTRE-LIEN-PREPLATES-S" >}}
-{{< paypal paypal_url="https://www.paypal.com/paypalme/VOTRE-LIEN-ICI/62" >}}
+<!-- Produit 9 -->
+<div class="product-card">
+  <img src="/images/produits/preplates-s-1.jpg" alt="Pack 100% préplates taille S" class="product-image">
+  <div class="product-info">
+    <div class="product-title">Pack 100% préplates taille S</div>
+    <div class="product-price">62,00€</div>
+    <button class="add-to-cart" onclick="alert('Contactez-nous pour commander')">Ajouter au panier</button>
+    <div class="payment-options">
+      <a href="https://buy.stripe.com/VOTRE-LIEN-PREPLATES-S" class="payment-btn stripe-btn" target="_blank">💳 Stripe</a>
+      <a href="https://www.paypal.com/paypalme/VOTRE-LIEN/62" class="payment-btn paypal-btn" target="_blank">💰 PayPal</a>
+    </div>
+  </div>
 </div>
 
-**Ou [Commander par email](/contact/)**
+<!-- Produit 10 -->
+<div class="product-card">
+  <img src="/images/produits/sarouel-dispo2-1.jpg" alt="Sarouel évolutif disponibilité immédiate v2" class="product-image">
+  <div class="product-info">
+    <div class="product-title">Sarouel évolutif disponibilité immédiate</div>
+    <div class="product-price">15,00€</div>
+    <button class="add-to-cart" onclick="alert('Contactez-nous pour commander')">Ajouter au panier</button>
+    <div class="payment-options">
+      <a href="https://buy.stripe.com/VOTRE-LIEN-DISPO2" class="payment-btn stripe-btn" target="_blank">💳 Stripe</a>
+      <a href="https://www.paypal.com/paypalme/VOTRE-LIEN/15" class="payment-btn paypal-btn" target="_blank">💰 PayPal</a>
+    </div>
+  </div>
+</div>
+
+</div>
 
 ---
 
@@ -204,15 +326,15 @@ Pack complet en préplates taille S.
 - 📧 Email : [votre-email]
 - 📞 Téléphone : [votre numéro]
 
-**Option 2 : Formulaire de Contact**
-[Lien vers page contact](/contact/)
+**Option 2 : Paiement en Ligne**
+Cliquez sur les boutons Stripe ou PayPal sous chaque produit.
 
 ---
 
 ## Informations Pratiques
 
 - **Livraison :** Frais offerts dès 60€
-- **Paiement :** Virement bancaire, PayPal, espèces
+- **Paiement :** Carte bancaire (Stripe), PayPal, virement, espèces
 - **Retours :** Possibles sous 14 jours
 - **Délai de livraison :** 3-5 jours ouvrés
 
