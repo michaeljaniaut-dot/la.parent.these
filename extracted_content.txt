@@ -1,0 +1,67 @@
+
+================================================================================
+FILE: Éditeur Wix _ La Parent These contact.pdf
+================================================================================
+Pages: 1
+
+
+--- Page 1 ---
+Error reading Éditeur Wix _ La Parent These contact.pdf: 'charmap' codec can't encode character '\ueddb' in position 620: character maps to <undefined>
+
+================================================================================
+FILE: Éditeur Wix _ La Parent These.moi.pdf
+================================================================================
+Pages: 1
+
+
+--- Page 1 ---
+Error reading Éditeur Wix _ La Parent These.moi.pdf: 'charmap' codec can't encode character '\ueddb' in position 625: character maps to <undefined>
+
+================================================================================
+FILE: Éditeur Wix _ La Parent These.pdf
+================================================================================
+Pages: 1
+
+
+--- Page 1 ---
+Error reading Éditeur Wix _ La Parent These.pdf: 'charmap' codec can't encode character '\ueddb' in position 436: character maps to <undefined>
+
+================================================================================
+FILE: Éditeur Wix _ La Parent These1.pdf
+================================================================================
+Pages: 1
+
+
+--- Page 1 ---
+Error reading Éditeur Wix _ La Parent These1.pdf: 'charmap' codec can't encode character '\ueddb' in position 217: character maps to <undefined>
+
+================================================================================
+FILE: Éditeur Wix _ La Parent These2.pdf
+================================================================================
+Pages: 1
+
+
+--- Page 1 ---
+Error reading Éditeur Wix _ La Parent These2.pdf: 'charmap' codec can't encode character '\ueddb' in position 311: character maps to <undefined>
+
+================================================================================
+FILE: Éditeur Wix _ La Parent These3.pdf
+================================================================================
+Pages: 1
+
+
+--- Page 1 ---
+Error reading Éditeur Wix _ La Parent These3.pdf: 'charmap' codec can't encode character '\ueddb' in position 485: character maps to <undefined>
+
+================================================================================
+FILE: Éditeur Wix _ La Parent These4.pdf
+================================================================================
+Pages: 1
+
+
+--- Page 1 ---
+Error reading Éditeur Wix _ La Parent These4.pdf: 'charmap' codec can't encode character '\ueddb' in position 1003: character maps to <undefined>
+
+================================================================================
+EXTRACTION COMPLETE
+================================================================================

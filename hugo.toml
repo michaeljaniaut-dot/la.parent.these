@@ -1,0 +1,63 @@
+baseURL = 'https://example.org/'
+languageCode = 'fr-fr'
+title = 'La Parent These'
+theme = 'ananke'
+
+[params]
+  description = 'Accompagnement perinatal, ateliers de portage physiologique, consultation sommeil'
+  favicon = ''
+  featured_image = '/images/hero.jpg'
+  background_color_class = 'bg-light-blue'
+  recent_posts_number = 3
+  
+[[params.ananke_socials]]
+  name = 'facebook'
+  url = '#'
+  
+[[params.ananke_socials]]
+  name = 'instagram'
+  url = '#'
+  
+[[params.ananke_socials]]
+  name = 'facebook'
+  url = '#'
+  
+[[params.ananke_socials]]
+  name = 'instagram'
+  url = '#'
+
+[menu]
+  [[menu.main]]
+    name = 'Accueil'
+    url = '/'
+    weight = 1
+    
+  [[menu.main]]
+    name = 'Prestations'
+    url = '/prestations/'
+    weight = 2
+    
+  [[menu.main]]
+    name = 'Prendre RDV'
+    url = '/rdv/'
+    weight = 3
+    
+  [[menu.main]]
+    name = 'Boutique'
+    url = '/boutique/'
+    weight = 4
+    
+  [[menu.main]]
+    name = 'Blog'
+    url = '/blog/'
+    weight = 5
+    
+  [[menu.main]]
+    name = 'Contact et FAQ'
+    url = '/contact/'
+    weight = 6
+    
+  [[menu.main]]
+    name = 'A propos'
+    url = '/about/'
+    weight = 7
