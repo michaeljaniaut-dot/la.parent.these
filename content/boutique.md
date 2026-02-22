@@ -15,11 +15,29 @@ featured_image: ""
 
 .shop-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 30px;
-  max-width: 1200px;
+  max-width: 1400px;
   margin: 0 auto;
   padding: 20px;
+}
+
+@media (min-width: 1200px) {
+  .shop-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 1199px) and (min-width: 768px) {
+  .shop-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 767px) {
+  .shop-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 .product-card {
@@ -145,20 +163,6 @@ featured_image: ""
 
 .paypal-btn:hover {
   background: #005A94;
-}
-
-@media (max-width: 968px) {
-  .shop-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
-  }
-}
-
-@media (max-width: 640px) {
-  .shop-grid {
-    grid-template-columns: 1fr;
-    gap: 20px;
-  }
 }
 </style>
 
