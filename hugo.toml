@@ -1,22 +1,17 @@
-baseURL = 'https://example.org/'
+baseURL = 'https://michaeljaniaut-dot.github.io/la.parent.these/'
 languageCode = 'fr-fr'
 title = 'La Parent These'
-theme = 'ananke'
+theme = 'book'
 
 [params]
-  description = 'Accompagnement perinatal, ateliers de portage physiologique, consultation sommeil'
-  favicon = ''
-  featured_image = '/images/hero.jpg'
-  background_color_class = 'bg-light-blue'
-  recent_posts_number = 3
+  BookTheme = 'light'
+  BookToC = true
+  BookSearch = true
+  BookMenuBundle = '/menu'
+  BookSection = '*'
   
-[[params.ananke_socials]]
-  name = 'facebook'
-  url = '#'
-  
-[[params.ananke_socials]]
-  name = 'instagram'
-  url = '#'
+[params.BookComments]
+  enabled = false
   
 [[params.ananke_socials]]
   name = 'facebook'
