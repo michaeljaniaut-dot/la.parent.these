@@ -43,7 +43,12 @@ Sarouel évolutif en tissu chaud, parfait pour l'hiver. Motif pommes adorable.
 
 Sarouel évolutif extra-chaud avec motif fleuri.
 
-**[Commander par email ou téléphone](/contact/)**
+<div class="payment-buttons-group">
+{{< stripe stripe_url="https://buy.stripe.com/VOTRE-LIEN-FLEURS" >}}
+{{< paypal paypal_url="https://www.paypal.com/paypalme/VOTRE-LIEN-ICI/14" >}}
+</div>
+
+**Ou [Commander par email](/contact/)**
 
 ---
 
@@ -56,7 +61,12 @@ Sarouel évolutif extra-chaud avec motif fleuri.
 
 Sarouel évolutif disponible pour expédition rapide.
 
-**[Commander par email ou téléphone](/contact/)**
+<div class="payment-buttons-group">
+{{< stripe stripe_url="https://buy.stripe.com/VOTRE-LIEN-DISPO1" >}}
+{{< paypal paypal_url="https://www.paypal.com/paypalme/VOTRE-LIEN-ICI/15" >}}
+</div>
+
+**Ou [Commander par email](/contact/)**
 
 ---
 
@@ -69,7 +79,12 @@ Sarouel évolutif disponible pour expédition rapide.
 
 Sarouel évolutif disponible pour expédition rapide.
 
-**[Commander par email ou téléphone](/contact/)**
+<div class="payment-buttons-group">
+{{< stripe stripe_url="https://buy.stripe.com/VOTRE-LIEN-DISPO2" >}}
+{{< paypal paypal_url="https://www.paypal.com/paypalme/VOTRE-LIEN-ICI/15" >}}
+</div>
+
+**Ou [Commander par email](/contact/)**
 
 ---
 
@@ -84,7 +99,12 @@ Sarouel évolutif disponible pour expédition rapide.
 
 Pack complet pour les tout-petits.
 
-**[Commander par email ou téléphone](/contact/)**
+<div class="payment-buttons-group">
+{{< stripe stripe_url="https://buy.stripe.com/VOTRE-LIEN-PACK-XS" >}}
+{{< paypal paypal_url="https://www.paypal.com/paypalme/VOTRE-LIEN-ICI/88" >}}
+</div>
+
+**Ou [Commander par email](/contact/)**
 
 ---
 
@@ -97,7 +117,12 @@ Pack complet pour les tout-petits.
 
 Pack complet taille S.
 
-**[Commander par email ou téléphone](/contact/)**
+<div class="payment-buttons-group">
+{{< stripe stripe_url="https://buy.stripe.com/VOTRE-LIEN-PACK-S" >}}
+{{< paypal paypal_url="https://www.paypal.com/paypalme/VOTRE-LIEN-ICI/90" >}}
+</div>
+
+**Ou [Commander par email](/contact/)**
 
 ---
 
@@ -110,7 +135,12 @@ Pack complet taille S.
 
 Pack complet taille M.
 
-**[Commander par email ou téléphone](/contact/)**
+<div class="payment-buttons-group">
+{{< stripe stripe_url="https://buy.stripe.com/VOTRE-LIEN-PACK-M" >}}
+{{< paypal paypal_url="https://www.paypal.com/paypalme/VOTRE-LIEN-ICI/95" >}}
+</div>
+
+**Ou [Commander par email](/contact/)**
 
 ---
 
@@ -123,7 +153,12 @@ Pack complet taille M.
 
 Pack complet taille L.
 
-**[Commander par email ou téléphone](/contact/)**
+<div class="payment-buttons-group">
+{{< stripe stripe_url="https://buy.stripe.com/VOTRE-LIEN-PACK-L" >}}
+{{< paypal paypal_url="https://www.paypal.com/paypalme/VOTRE-LIEN-ICI/100" >}}
+</div>
+
+**Ou [Commander par email](/contact/)**
 
 ---
 
@@ -137,7 +172,12 @@ Pack complet taille L.
 
 Pack complet en préplates pour les plus petits.
 
-**[Commander par email ou téléphone](/contact/)**
+<div class="payment-buttons-group">
+{{< stripe stripe_url="https://buy.stripe.com/VOTRE-LIEN-PREPLATES-XS" >}}
+{{< paypal paypal_url="https://www.paypal.com/paypalme/VOTRE-LIEN-ICI/60" >}}
+</div>
+
+**Ou [Commander par email](/contact/)**
 
 ---
 
@@ -149,7 +189,12 @@ Pack complet en préplates pour les plus petits.
 
 Pack complet en préplates taille S.
 
-**[Commander par email ou téléphone](/contact/)**
+<div class="payment-buttons-group">
+{{< stripe stripe_url="https://buy.stripe.com/VOTRE-LIEN-PREPLATES-S" >}}
+{{< paypal paypal_url="https://www.paypal.com/paypalme/VOTRE-LIEN-ICI/62" >}}
+</div>
+
+**Ou [Commander par email](/contact/)**
 
 ---
 
