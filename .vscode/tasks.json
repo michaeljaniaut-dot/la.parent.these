@@ -1,0 +1,28 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "🚀 Lancer Hugo Server",
+      "type": "shell",
+      "command": "hugo server -D --navigateToChanged",
+      "isBackground": true,
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated"
+      }
+    },
+    {
+      "label": "🔨 Build Hugo",
+      "type": "shell",
+      "command": "hugo",
+      "problemMatcher": []
+    },
+    {
+      "label": "📤 Deploy",
+      "type": "shell",
+      "command": "hugo && git add . && git commit -m 'Update site' && git push",
+      "problemMatcher": []
+    }
+  ]
+}
