@@ -1,0 +1,36 @@
+<!-- Bouton PayPal -->
+<div class="payment-button paypal-button">
+  <a href="{{ .Get "paypal_url" }}" 
+     class="btn btn-paypal" 
+     target="_blank" 
+     rel="noopener">
+    💰 Payer par PayPal
+  </a>
+</div>
+
+<style>
+.btn-paypal {
+  background-color: #0070BA;
+  color: white;
+  box-shadow: 0 2px 8px rgba(0, 112, 186, 0.3);
+}
+
+.btn-paypal:hover {
+  background-color: #005A94;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 112, 186, 0.4);
+}
+
+.payment-buttons-group {
+  display: flex;
+  gap: 15px;
+  margin: 20px 0;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 768px) {
+  .payment-buttons-group {
+    flex-direction: column;
+  }
+}
+</style>

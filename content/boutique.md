@@ -24,7 +24,12 @@ Découvrez notre sélection de vêtements évolutifs pour bébés et enfants.
 
 Sarouel évolutif en tissu chaud, parfait pour l'hiver. Motif pommes adorable.
 
-**[Commander par email ou téléphone](/contact/)**
+<div class="payment-buttons-group">
+{{< stripe stripe_url="https://buy.stripe.com/VOTRE-LIEN-ICI" >}}
+{{< paypal paypal_url="https://www.paypal.com/paypalme/VOTRE-LIEN-ICI/14" >}}
+</div>
+
+**Ou [Commander par email](/contact/)**
 
 ---
 

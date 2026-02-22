@@ -1,0 +1,47 @@
+<!-- Bouton Stripe Payment Link -->
+<div class="payment-button stripe-button">
+  <a href="{{ .Get "stripe_url" }}" 
+     class="btn btn-primary" 
+     target="_blank" 
+     rel="noopener">
+    💳 Payer par Carte (Stripe)
+  </a>
+</div>
+
+<style>
+.payment-button {
+  margin: 15px 0;
+}
+
+.btn {
+  display: inline-block;
+  padding: 12px 24px;
+  font-size: 16px;
+  font-weight: 600;
+  text-decoration: none;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  text-align: center;
+  min-width: 200px;
+}
+
+.btn-primary {
+  background-color: #635BFF;
+  color: white;
+  box-shadow: 0 2px 8px rgba(99, 91, 255, 0.3);
+}
+
+.btn-primary:hover {
+  background-color: #5147E5;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(99, 91, 255, 0.4);
+}
+
+@media (max-width: 768px) {
+  .btn {
+    display: block;
+    width: 100%;
+    margin: 10px 0;
+  }
+}
+</style>

@@ -3,6 +3,9 @@ languageCode = 'fr-fr'
 title = 'La Parent These'
 theme = 'ananke'
 
+[markup.goldmark.renderer]
+  unsafe = true
+
 [params]
   description = 'Accompagnement perinatal, ateliers de portage physiologique, consultation sommeil'
   favicon = ''
