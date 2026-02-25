@@ -1,5 +1,372 @@
 {{ define "main" }}
-<div style="width: 100%; max-width: 100%; margin: 0; padding: 0;">
-  {{ .Content }}
-</div>
+<section class="hero-home">
+  <div class="hero-overlay">
+    <h1>BIENVENUE CHEZ VOUS</h1>
+    <p class="hero-subtitle">Accompagnement périnatal, ateliers de portage physiologique, consultation sommeil et bien plus</p>
+  </div>
+</section>
+
+<section class="quote-section">
+  <p class="quote-text">Plus le nid est douillet, plus les ailes seront grandes pour s'envoler.</p>
+</section>
+
+<section class="services-section">
+  <nav class="services-tabs">
+    <button class="tab-btn active" data-tab="tous">Tous les services</button>
+    <button class="tab-btn" data-tab="portage">Les ateliers de portage</button>
+    <button class="tab-btn" data-tab="sommeil">Sommeil</button>
+    <button class="tab-btn" data-tab="allaitement">Allaitement</button>
+    <button class="tab-btn" data-tab="bebe-signe">Bébé signe</button>
+  </nav>
+
+  <div class="services-container">
+    <div id="tab-tous" class="tab-content active">
+      <div class="services-cards">
+        <article class="service-card-home">
+          <div class="card-image-wrapper">
+            <img src="/images/allaitement.jpg" alt="Atelier de portage découverte">
+          </div>
+          <div class="card-content">
+            <h3>Atelier de portage découverte</h3>
+            <a href="https://calendly.com/votre-compte/atelier-decouverte" target="_blank" class="btn-prendre-rdv">Prendre RDV</a>
+          </div>
+        </article>
+
+        <article class="service-card-home">
+          <div class="card-image-wrapper">
+            <img src="/images/portage.jpg" alt="Atelier de portage avancé">
+          </div>
+          <div class="card-content">
+            <h3>Atelier de portage avancé</h3>
+            <a href="https://calendly.com/votre-compte/atelier-avance" target="_blank" class="btn-prendre-rdv">Prendre RDV</a>
+          </div>
+        </article>
+
+        <article class="service-card-home">
+          <div class="card-image-wrapper">
+            <img src="/images/portage.jpg" alt="Atelier de portage dos">
+          </div>
+          <div class="card-content">
+            <h3>Atelier de portage dos</h3>
+            <a href="https://calendly.com/votre-compte/atelier-dos" target="_blank" class="btn-prendre-rdv">Prendre RDV</a>
+          </div>
+        </article>
+      </div>
+    </div>
+
+    <div id="tab-portage" class="tab-content">
+      <div class="services-cards">
+        <article class="service-card-home">
+          <div class="card-image-wrapper">
+            <img src="/images/allaitement.jpg" alt="Atelier de portage découverte">
+          </div>
+          <div class="card-content">
+            <h3>Atelier de portage découverte</h3>
+            <a href="https://calendly.com/votre-compte/atelier-decouverte" target="_blank" class="btn-prendre-rdv">Prendre RDV</a>
+          </div>
+        </article>
+
+        <article class="service-card-home">
+          <div class="card-image-wrapper">
+            <img src="/images/portage.jpg" alt="Atelier de portage avancé">
+          </div>
+          <div class="card-content">
+            <h3>Atelier de portage avancé</h3>
+            <a href="https://calendly.com/votre-compte/atelier-avance" target="_blank" class="btn-prendre-rdv">Prendre RDV</a>
+          </div>
+        </article>
+
+        <article class="service-card-home">
+          <div class="card-image-wrapper">
+            <img src="/images/portage.jpg" alt="Atelier de portage dos">
+          </div>
+          <div class="card-content">
+            <h3>Atelier de portage dos</h3>
+            <a href="https://calendly.com/votre-compte/atelier-dos" target="_blank" class="btn-prendre-rdv">Prendre RDV</a>
+          </div>
+        </article>
+      </div>
+    </div>
+
+    <div id="tab-sommeil" class="tab-content">
+      <div class="services-cards">
+        <article class="service-card-home">
+          <div class="card-image-wrapper">
+            <img src="/images/sommeil.jpg" alt="Consultation sommeil">
+          </div>
+          <div class="card-content">
+            <h3>Consultation sommeil</h3>
+            <a href="https://calendly.com/votre-compte/consultation-sommeil" target="_blank" class="btn-prendre-rdv">Prendre RDV</a>
+          </div>
+        </article>
+      </div>
+    </div>
+
+    <div id="tab-allaitement" class="tab-content">
+      <div class="services-cards">
+        <article class="service-card-home">
+          <div class="card-image-wrapper">
+            <img src="/images/allaitement.jpg" alt="Accompagnement allaitement">
+          </div>
+          <div class="card-content">
+            <h3>Accompagnement allaitement</h3>
+            <a href="https://calendly.com/votre-compte/accompagnement-allaitement" target="_blank" class="btn-prendre-rdv">Prendre RDV</a>
+          </div>
+        </article>
+      </div>
+    </div>
+
+    <div id="tab-bebe-signe" class="tab-content">
+      <div class="services-cards">
+        <article class="service-card-home">
+          <div class="card-image-wrapper">
+            <img src="/images/bebe-signe.jpg" alt="Atelier bébé signe">
+          </div>
+          <div class="card-content">
+            <h3>Atelier bébé signe</h3>
+            <a href="https://calendly.com/votre-compte/atelier-bebe-signe" target="_blank" class="btn-prendre-rdv">Prendre RDV</a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+.hero-home {
+  position: relative;
+  width: 100%;
+  height: 500px;
+  background: url('/images/hero.jpg') center center / cover no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+}
+
+.hero-home::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(200, 180, 200, 0.4);
+}
+
+.hero-overlay {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  color: white;
+  padding: 2rem;
+}
+
+.hero-overlay h1 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 4rem;
+  font-weight: 400;
+  letter-spacing: 0.15em;
+  margin: 0 0 1rem 0;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+}
+
+.hero-subtitle {
+  font-size: 1.2rem;
+  font-weight: 300;
+  letter-spacing: 0.05em;
+  color: rgba(255,255,255,0.95);
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+}
+
+.quote-section {
+  background: #f5e6e0;
+  padding: 3rem 2rem;
+  text-align: center;
+}
+
+.quote-text {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2rem;
+  font-style: italic;
+  color: #3a2f27;
+  margin: 0;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.services-section {
+  background: #e8d5c4;
+  padding: 3rem 2rem 5rem;
+}
+
+.services-tabs {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin-bottom: 3rem;
+  flex-wrap: wrap;
+  border-bottom: 2px solid rgba(139, 69, 19, 0.2);
+  padding-bottom: 1rem;
+}
+
+.tab-btn {
+  background: none;
+  border: none;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.1rem;
+  color: #3a2f27;
+  cursor: pointer;
+  padding: 0.5rem 1rem;
+  border-bottom: 3px solid transparent;
+  transition: all 0.3s ease;
+  position: relative;
+  top: 2px;
+}
+
+.tab-btn:hover {
+  color: #8B4513;
+}
+
+.tab-btn.active {
+  color: #8B4513;
+  border-bottom-color: #8B4513;
+}
+
+.services-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.tab-content {
+  display: none;
+}
+
+.tab-content.active {
+  display: block;
+}
+
+.services-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2.5rem;
+}
+
+.service-card-home {
+  background: white;
+  border-radius: 0;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease;
+}
+
+.service-card-home:hover {
+  transform: translateY(-5px);
+}
+
+.card-image-wrapper {
+  width: 100%;
+  height: 250px;
+  overflow: hidden;
+  background: #f0f0f0;
+}
+
+.card-image-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.card-content {
+  padding: 2rem 1.5rem;
+  text-align: center;
+  background: #f5ebe5;
+}
+
+.card-content h3 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.5rem;
+  color: #3a2f27;
+  margin: 0 0 1.5rem 0;
+  font-weight: 400;
+}
+
+.btn-prendre-rdv {
+  display: inline-block;
+  padding: 0.75rem 2rem;
+  border: 2px solid #a67c52;
+  border-radius: 25px;
+  color: #a67c52;
+  text-decoration: none;
+  font-weight: 400;
+  transition: all 0.3s ease;
+  background: transparent;
+}
+
+.btn-prendre-rdv:hover {
+  background: #a67c52;
+  color: white;
+}
+
+@media (max-width: 968px) {
+  .services-cards {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+  }
+
+  .hero-overlay h1 {
+    font-size: 3rem;
+  }
+
+  .quote-text {
+    font-size: 1.5rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .services-cards {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-overlay h1 {
+    font-size: 2.5rem;
+  }
+
+  .hero-subtitle {
+    font-size: 1rem;
+  }
+
+  .quote-text {
+    font-size: 1.2rem;
+  }
+
+  .services-tabs {
+    gap: 1rem;
+  }
+
+  .tab-btn {
+    font-size: 0.95rem;
+    padding: 0.4rem 0.8rem;
+  }
+}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const tabs = document.querySelectorAll('.tab-btn');
+  const contents = document.querySelectorAll('.tab-content');
+
+  tabs.forEach(tab => {
+    tab.addEventListener('click', function() {
+      const tabName = this.dataset.tab;
+
+      tabs.forEach(t => t.classList.remove('active'));
+      contents.forEach(c => c.classList.remove('active'));
+
+      this.classList.add('active');
+      document.getElementById('tab-' + tabName).classList.add('active');
+    });
+  });
+});
+</script>
 {{ end }}

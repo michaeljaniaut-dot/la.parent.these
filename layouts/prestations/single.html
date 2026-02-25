@@ -1,0 +1,174 @@
+{{ define "main" }}
+<main class="prestation-single">
+  <article class="prestation-full">
+    <header class="prestation-header">
+      <h1>{{ .Title }}</h1>
+      <p class="prestation-subtitle">{{ .Description }}</p>
+    </header>
+
+    <section class="prestation-body">
+      <div class="prestation-main-content">
+        {{ if .Params.image }}
+        <div class="prestation-single-image">
+          <img src="{{ .Params.image }}" alt="{{ .Title }}">
+        </div>
+        {{ end }}
+
+        <div class="prestation-text">
+          {{ if .Params.details }}
+          <div class="prestation-description">
+            {{ .Params.details | markdownify }}
+          </div>
+          {{ end }}
+
+          {{ .Content }}
+        </div>
+      </div>
+
+      <aside class="prestation-sidebar">
+        <div class="prestation-card-info">
+          <h3>Informations pratiques</h3>
+          
+          {{ if .Params.duree }}
+          <div class="info-item">
+            <strong>Durée :</strong>
+            <span>{{ .Params.duree }}</span>
+          </div>
+          {{ end }}
+          
+          {{ if .Params.prix }}
+          <div class="info-item">
+            <strong>Prix :</strong>
+            <span>{{ .Params.prix }}</span>
+          </div>
+          {{ end }}
+
+          <a href="/rdv/" class="btn-rdv">Je prends RDV</a>
+        </div>
+      </aside>
+    </section>
+  </article>
+</main>
+
+<style>
+.prestation-header {
+  text-align: center;
+  padding: 3rem 2rem;
+  background: #f8f3f0;
+}
+
+.prestation-header h1 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2.5rem;
+  color: #3a2f27;
+  margin-bottom: 1rem;
+}
+
+.prestation-subtitle {
+  font-size: 1.2rem;
+  color: #6b5d54;
+}
+
+.prestation-body {
+  max-width: 1200px;
+  margin: 3rem auto;
+  padding: 0 2rem;
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 3rem;
+}
+
+.prestation-main-content {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.prestation-single-image img {
+  width: 100%;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.prestation-text {
+  color: #6b5d54;
+  line-height: 1.8;
+  font-size: 1.05rem;
+}
+
+.prestation-description p {
+  margin-bottom: 1rem;
+}
+
+.prestation-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.prestation-card-info {
+  background: #f8f3f0;
+  padding: 2rem;
+  border-radius: 8px;
+  position: sticky;
+  top: 2rem;
+}
+
+.prestation-card-info h3 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
+  color: #3a2f27;
+}
+
+.info-item {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #e0d5cc;
+}
+
+.info-item:last-of-type {
+  border-bottom: none;
+  margin-bottom: 2rem;
+}
+
+.info-item strong {
+  color: #3a2f27;
+  margin-bottom: 0.25rem;
+}
+
+.info-item span {
+  color: #6b5d54;
+  font-size: 1.1rem;
+}
+
+.btn-rdv {
+  display: block;
+  width: 100%;
+  padding: 1rem;
+  background: #a67c52;
+  color: white;
+  text-decoration: none;
+  border-radius: 25px;
+  text-align: center;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.btn-rdv:hover {
+  background: #8d6641;
+}
+
+@media (max-width: 768px) {
+  .prestation-body {
+    grid-template-columns: 1fr;
+  }
+
+  .prestation-card-info {
+    position: static;
+  }
+}
+</style>
+{{ end }}

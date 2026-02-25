@@ -1,0 +1,276 @@
+{{ define "main" }}
+<main class="prestations-main">
+  {{ if .Sections }}
+  <section class="prestations-hero">
+    <h1>{{ .Title }}</h1>
+    {{ if .Content }}
+    <p class="prestations-subtitle">{{ .Content }}</p>
+    {{ end }}
+  </section>
+
+  <section class="prestations-grid">
+    {{ range $index, $section := sort .Sections ".Params.weight" }}
+    <article class="prestation-card {{ if not (modBool $index 2) }}reverse{{ end }}">
+      {{ if $section.Params.image }}
+      <div class="prestation-image">
+        <img src="{{ $section.Params.image }}" alt="{{ $section.Title }}">
+      </div>
+      {{ end }}
+      <div class="prestation-content">
+        <h2>{{ $section.Title }}</h2>
+        <a href="{{ $section.Permalink }}" class="btn-decouvrir">Découvrir</a>
+      </div>
+    </article>
+    {{ end }}
+  </section>
+  {{ else }}
+  <section class="prestation-detail-content">
+    {{ .Content }}
+  </section>
+  {{ end }}
+</main>
+
+<style>
+.prestations-main {
+  background: #d4a894;
+}
+
+.prestations-hero {
+  text-align: center;
+  padding: 3rem 2rem;
+  background: #d4a894;
+}
+
+.prestations-hero h1 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 3rem;
+  margin-bottom: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #3a2f27;
+}
+
+.prestations-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0;
+  max-width: 100%;
+  margin: 0;
+}
+
+.prestation-card {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 500px;
+}
+
+.prestation-card.reverse {
+  direction: rtl;
+}
+
+.prestation-card.reverse > * {
+  direction: ltr;
+}
+
+.prestation-image {
+  position: relative;
+  overflow: hidden;
+}
+
+.prestation-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.prestation-content {
+  background: #e8d5c4;
+  padding: 4rem 3rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.prestation-content h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2.5rem;
+  margin-bottom: 3rem;
+  color: #3a2f27;
+  font-weight: 400;
+}
+
+.btn-decouvrir {
+  display: inline-block;
+  padding: 0.75rem 2.5rem;
+  border: 2px solid #3a2f27;
+  border-radius: 25px;
+  color: #3a2f27;
+  text-decoration: none;
+  font-weight: 400;
+  transition: all 0.3s ease;
+  background: transparent;
+}
+
+.btn-decouvrir:hover {
+  background: #3a2f27;
+  color: #fff;
+}
+
+@media (max-width: 768px) {
+  .prestations-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .prestation-card {
+    grid-template-columns: 1fr;
+    min-height: auto;
+  }
+  
+  .prestation-card.reverse {
+    direction: ltr;
+  }
+  
+  .prestation-image {
+    min-height: 300px;
+  }
+  
+  .prestation-content {
+    padding: 3rem 2rem;
+  }
+}
+
+.prestation-detail-content {
+  max-width: 100%;
+  margin: 0;
+  background: #f5ebe5;
+}
+
+.prestation-detail-content h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2.5rem;
+  color: #3a2f27;
+  text-align: center;
+  margin: 0;
+  padding: 3rem 2rem;
+  background: #e8d5c4;
+}
+
+.prestation-detail-content .atelier-section {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 500px;
+}
+
+.prestation-detail-content .atelier-section.reverse {
+  direction: rtl;
+}
+
+.prestation-detail-content .atelier-section.reverse > * {
+  direction: ltr;
+}
+
+.prestation-detail-content .atelier-image {
+  position: relative;
+  overflow: hidden;
+}
+
+.prestation-detail-content .atelier-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.prestation-detail-content .atelier-text {
+  background: #e8d5c4;
+  padding: 4rem 3rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  color: #3a2f27;
+  line-height: 1.8;
+}
+
+.prestation-detail-content .atelier-text h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
+  padding: 0;
+  text-align: left;
+  background: transparent;
+}
+
+.prestation-detail-content .atelier-text p {
+  margin-bottom: 1rem;
+  color: #3a2f27;
+}
+
+.prestation-detail-content .atelier-text strong {
+  display: block;
+  margin-top: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.prestation-detail-content .atelier-cta {
+  display: flex;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.prestation-detail-content .btn-rdv,
+.prestation-detail-content .btn-info {
+  display: inline-block;
+  padding: 0.75rem 2rem;
+  border-radius: 25px;
+  text-decoration: none;
+  font-weight: 400;
+  transition: all 0.3s ease;
+  text-align: center;
+}
+
+.prestation-detail-content .btn-info {
+  border: 2px solid #3a2f27;
+  color: #3a2f27;
+  background: transparent;
+}
+
+.prestation-detail-content .btn-info:hover {
+  background: #3a2f27;
+  color: #fff;
+}
+
+.prestation-detail-content .btn-rdv {
+  background: #a67c52;
+  color: white;
+  border: 2px solid #a67c52;
+}
+
+.prestation-detail-content .btn-rdv:hover {
+  background: #8d6641;
+  border-color: #8d6641;
+}
+
+@media (max-width: 768px) {
+  .prestation-detail-content .atelier-section {
+    grid-template-columns: 1fr;
+  }
+  
+  .prestation-detail-content .atelier-section.reverse {
+    direction: ltr;
+  }
+  
+  .prestation-detail-content .atelier-image {
+    min-height: 300px;
+  }
+  
+  .prestation-detail-content .atelier-text {
+    padding: 3rem 2rem;
+  }
+  
+  .prestation-detail-content .atelier-cta {
+    flex-direction: column;
+  }
+}
+</style>
+{{ end }}

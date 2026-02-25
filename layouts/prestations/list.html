@@ -1,0 +1,135 @@
+{{ define "main" }}
+<main class="prestations-main">
+  <section class="prestations-hero">
+    <h1>{{ .Title }}</h1>
+    <p class="prestations-intro">{{ .Content }}</p>
+  </section>
+
+  <!-- Debug: Sections count = {{ len .Sections }} -->
+  <!-- Debug: RegularPages count = {{ len .RegularPages }} -->
+  
+  <section class="prestations-grid">
+    {{ range sort .Sections ".Params.weight" }}
+    <article class="prestation-card">
+      {{ if .Params.image }}
+      <div class="prestation-image">
+        <img src="{{ .Params.image }}" alt="{{ .Title }}">
+      </div>
+      {{ end }}
+      <div class="prestation-content">
+        <h2>{{ .Title }}</h2>
+        <p>{{ .Description }}</p>
+        <a href="{{ .Permalink }}" class="btn-decouvrir">Découvrir</a>
+      </div>
+    </article>
+    {{ end }}
+  </section>
+</main>
+
+<style>
+.prestations-hero {
+  text-align: center;
+  padding: 4rem 2rem;
+  background: #f8f3f0;
+}
+
+.prestations-hero h1 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.prestations-intro {
+  font-size: 1.2rem;
+  color: #6b5d54;
+}
+
+.prestations-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+  gap: 0;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.prestation-card {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 400px;
+}
+
+.prestation-card:nth-child(even) {
+  direction: rtl;
+}
+
+.prestation-card:nth-child(even) > * {
+  direction: ltr;
+}
+
+.prestation-image {
+  position: relative;
+  overflow: hidden;
+}
+
+.prestation-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.prestation-content {
+  background: #e8d5c4;
+  padding: 3rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.prestation-content h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+  color: #3a2f27;
+}
+
+.prestation-content p {
+  color: #6b5d54;
+  margin-bottom: 2rem;
+  line-height: 1.6;
+}
+
+.btn-decouvrir {
+  display: inline-block;
+  padding: 0.75rem 2.5rem;
+  border: 2px solid #3a2f27;
+  border-radius: 25px;
+  color: #3a2f27;
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.btn-decouvrir:hover {
+  background: #3a2f27;
+  color: #fff;
+}
+
+@media (max-width: 768px) {
+  .prestations-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .prestation-card {
+    grid-template-columns: 1fr;
+  }
+  
+  .prestation-card:nth-child(even) {
+    direction: ltr;
+  }
+}
+</style>
+{{ end }}

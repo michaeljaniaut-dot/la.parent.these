@@ -1,0 +1,208 @@
+{{ define "main" }}
+<main class="rdv-main">
+  <section class="rdv-hero">
+    <h1>Nos services</h1>
+  </section>
+
+  <section class="services-grid">
+    <article class="service-card">
+      <div class="service-image">
+        <img src="/images/allaitement.jpg" alt="Atelier de portage découverte">
+      </div>
+      <div class="service-content">
+        <h2>Atelier de portage découverte</h2>
+        <hr class="divider">
+        <p class="service-duration">2 h</p>
+        <p class="service-price">55 €</p>
+        <a href="https://calendly.com/votre-compte/atelier-decouverte" target="_blank" class="btn-reserver">Réserver</a>
+      </div>
+    </article>
+
+    <article class="service-card">
+      <div class="service-image">
+        <img src="/images/portage.jpg" alt="Atelier de portage avancé">
+      </div>
+      <div class="service-content">
+        <h2>Atelier de portage avancé</h2>
+        <hr class="divider">
+        <p class="service-duration">2 h</p>
+        <p class="service-price">55 €</p>
+        <a href="https://calendly.com/votre-compte/atelier-avance" target="_blank" class="btn-reserver">Réserver</a>
+      </div>
+    </article>
+
+    <article class="service-card">
+      <div class="service-image">
+        <img src="/images/portage.jpg" alt="Atelier de portage dos">
+      </div>
+      <div class="service-content">
+        <h2>Atelier de portage dos</h2>
+        <hr class="divider">
+        <p class="service-duration">2 h</p>
+        <p class="service-price">55 €</p>
+        <a href="https://calendly.com/votre-compte/atelier-dos" target="_blank" class="btn-reserver">Réserver</a>
+      </div>
+    </article>
+
+    <article class="service-card">
+      <div class="service-image">
+        <img src="/images/sommeil.jpg" alt="Consultation sommeil">
+      </div>
+      <div class="service-content">
+        <h2>Consultation sommeil</h2>
+        <hr class="divider">
+        <p class="service-duration">1h30</p>
+        <p class="service-price">60 €</p>
+        <a href="https://calendly.com/votre-compte/consultation-sommeil" target="_blank" class="btn-reserver">Réserver</a>
+      </div>
+    </article>
+
+    <article class="service-card">
+      <div class="service-image">
+        <img src="/images/allaitement.jpg" alt="Accompagnement allaitement">
+      </div>
+      <div class="service-content">
+        <h2>Accompagnement allaitement</h2>
+        <hr class="divider">
+        <p class="service-duration">1h30</p>
+        <p class="service-price">50 €</p>
+        <a href="https://calendly.com/votre-compte/accompagnement-allaitement" target="_blank" class="btn-reserver">Réserver</a>
+      </div>
+    </article>
+
+    <article class="service-card">
+      <div class="service-image">
+        <img src="/images/bebe-signe.jpg" alt="Atelier bébé signe">
+      </div>
+      <div class="service-content">
+        <h2>Atelier bébé signe</h2>
+        <hr class="divider">
+        <p class="service-duration">1h30</p>
+        <p class="service-price">45 €</p>
+        <a href="https://calendly.com/votre-compte/atelier-bebe-signe" target="_blank" class="btn-reserver">Réserver</a>
+      </div>
+    </article>
+  </section>
+</main>
+
+<style>
+.rdv-main {
+  background: #e8d5c4;
+  min-height: 100vh;
+  padding-bottom: 4rem;
+}
+
+.rdv-hero {
+  text-align: center;
+  padding: 3rem 2rem;
+  background: #e8d5c4;
+}
+
+.rdv-hero h1 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 3rem;
+  margin: 0;
+  color: #3a2f27;
+  font-weight: 400;
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 3rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.service-card {
+  background: white;
+  border-radius: 0;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.service-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+}
+
+.service-image {
+  width: 100%;
+  height: 250px;
+  overflow: hidden;
+}
+
+.service-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.service-content {
+  padding: 2rem 1.5rem;
+  text-align: center;
+}
+
+.service-content h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.8rem;
+  color: #3a2f27;
+  margin-bottom: 1rem;
+  font-weight: 400;
+}
+
+.divider {
+  border: none;
+  border-top: 1px solid #d4a894;
+  margin: 1rem auto;
+  width: 80px;
+}
+
+.service-duration,
+.service-price {
+  font-size: 1rem;
+  color: #6b5d54;
+  margin: 0.5rem 0;
+}
+
+.service-duration {
+  font-size: 0.95rem;
+}
+
+.service-price {
+  font-size: 1.1rem;
+  color: #3a2f27;
+  margin-bottom: 1.5rem;
+}
+
+.btn-reserver {
+  display: inline-block;
+  padding: 0.75rem 2.5rem;
+  border: 2px solid #a67c52;
+  border-radius: 25px;
+  color: #a67c52;
+  text-decoration: none;
+  font-weight: 400;
+  transition: all 0.3s ease;
+  background: transparent;
+}
+
+.btn-reserver:hover {
+  background: #a67c52;
+  color: white;
+}
+
+@media (max-width: 768px) {
+  .services-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .rdv-hero h1 {
+    font-size: 2.5rem;
+  }
+}
+</style>
+{{ end }}
