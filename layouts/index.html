@@ -20,113 +20,96 @@
   </nav>
 
   <div class="services-container">
+    <!-- Tous les services -->
     <div id="tab-tous" class="tab-content active">
       <div class="services-cards">
-        <article class="service-card-home">
-          <div class="card-image-wrapper">
-            <img src="/images/allaitement.jpg" alt="Atelier de portage découverte">
-          </div>
-          <div class="card-content">
-            <h3>Atelier de portage découverte</h3>
-            <a href="https://calendly.com/votre-compte/atelier-decouverte" target="_blank" class="btn-prendre-rdv">Prendre RDV</a>
-          </div>
-        </article>
-
-        <article class="service-card-home">
-          <div class="card-image-wrapper">
-            <img src="/images/portage.jpg" alt="Atelier de portage avancé">
-          </div>
-          <div class="card-content">
-            <h3>Atelier de portage avancé</h3>
-            <a href="https://calendly.com/votre-compte/atelier-avance" target="_blank" class="btn-prendre-rdv">Prendre RDV</a>
-          </div>
-        </article>
-
-        <article class="service-card-home">
-          <div class="card-image-wrapper">
-            <img src="/images/portage.jpg" alt="Atelier de portage dos">
-          </div>
-          <div class="card-content">
-            <h3>Atelier de portage dos</h3>
-            <a href="https://calendly.com/votre-compte/atelier-dos" target="_blank" class="btn-prendre-rdv">Prendre RDV</a>
-          </div>
-        </article>
+        {{ range .Site.Data.services.services }}
+          <article class="service-card-home" data-category="{{ .category }}">
+            <div class="card-image-wrapper">
+              <img src="{{ .image }}" alt="{{ .title }}">
+            </div>
+            <div class="card-content">
+              <h3>{{ .title }}</h3><p class="service-subtitle">{{ .subtitle }}</p>
+              <a href="{{ .cal_link }}" target="_blank" class="btn-prendre-rdv">Prendre RDV</a>
+            </div>
+          </article>
+        {{ end }}
       </div>
     </div>
 
+    <!-- Onglet Portage -->
     <div id="tab-portage" class="tab-content">
       <div class="services-cards">
-        <article class="service-card-home">
-          <div class="card-image-wrapper">
-            <img src="/images/allaitement.jpg" alt="Atelier de portage découverte">
-          </div>
-          <div class="card-content">
-            <h3>Atelier de portage découverte</h3>
-            <a href="https://calendly.com/votre-compte/atelier-decouverte" target="_blank" class="btn-prendre-rdv">Prendre RDV</a>
-          </div>
-        </article>
-
-        <article class="service-card-home">
-          <div class="card-image-wrapper">
-            <img src="/images/portage.jpg" alt="Atelier de portage avancé">
-          </div>
-          <div class="card-content">
-            <h3>Atelier de portage avancé</h3>
-            <a href="https://calendly.com/votre-compte/atelier-avance" target="_blank" class="btn-prendre-rdv">Prendre RDV</a>
-          </div>
-        </article>
-
-        <article class="service-card-home">
-          <div class="card-image-wrapper">
-            <img src="/images/portage.jpg" alt="Atelier de portage dos">
-          </div>
-          <div class="card-content">
-            <h3>Atelier de portage dos</h3>
-            <a href="https://calendly.com/votre-compte/atelier-dos" target="_blank" class="btn-prendre-rdv">Prendre RDV</a>
-          </div>
-        </article>
+        {{ range .Site.Data.services.services }}
+          {{ if eq .category "portage" }}
+            <article class="service-card-home">
+              <div class="card-image-wrapper">
+                <img src="{{ .image }}" alt="{{ .title }}">
+              </div>
+              <div class="card-content">
+                <h3>{{ .title }}</h3><p class="service-subtitle">{{ .subtitle }}</p>
+                <a href="{{ .cal_link }}" target="_blank" class="btn-prendre-rdv">Prendre RDV</a>
+              </div>
+            </article>
+          {{ end }}
+        {{ end }}
       </div>
     </div>
 
+    <!-- Onglet Sommeil -->
     <div id="tab-sommeil" class="tab-content">
       <div class="services-cards">
-        <article class="service-card-home">
-          <div class="card-image-wrapper">
-            <img src="/images/sommeil.jpg" alt="Consultation sommeil">
-          </div>
-          <div class="card-content">
-            <h3>Consultation sommeil</h3>
-            <a href="https://calendly.com/votre-compte/consultation-sommeil" target="_blank" class="btn-prendre-rdv">Prendre RDV</a>
-          </div>
-        </article>
+        {{ range .Site.Data.services.services }}
+          {{ if eq .category "sommeil" }}
+            <article class="service-card-home">
+              <div class="card-image-wrapper">
+                <img src="{{ .image }}" alt="{{ .title }}">
+              </div>
+              <div class="card-content">
+                <h3>{{ .title }}</h3><p class="service-subtitle">{{ .subtitle }}</p>
+                <a href="{{ .cal_link }}" target="_blank" class="btn-prendre-rdv">Prendre RDV</a>
+              </div>
+            </article>
+          {{ end }}
+        {{ end }}
       </div>
     </div>
 
+    <!-- Onglet Allaitement -->
     <div id="tab-allaitement" class="tab-content">
       <div class="services-cards">
-        <article class="service-card-home">
-          <div class="card-image-wrapper">
-            <img src="/images/allaitement.jpg" alt="Accompagnement allaitement">
-          </div>
-          <div class="card-content">
-            <h3>Accompagnement allaitement</h3>
-            <a href="https://calendly.com/votre-compte/accompagnement-allaitement" target="_blank" class="btn-prendre-rdv">Prendre RDV</a>
-          </div>
-        </article>
+        {{ range .Site.Data.services.services }}
+          {{ if eq .category "allaitement" }}
+            <article class="service-card-home">
+              <div class="card-image-wrapper">
+                <img src="{{ .image }}" alt="{{ .title }}">
+              </div>
+              <div class="card-content">
+                <h3>{{ .title }}</h3><p class="service-subtitle">{{ .subtitle }}</p>
+                <a href="{{ .cal_link }}" target="_blank" class="btn-prendre-rdv">Prendre RDV</a>
+              </div>
+            </article>
+          {{ end }}
+        {{ end }}
       </div>
     </div>
 
+    <!-- Onglet Bébé signe -->
     <div id="tab-bebe-signe" class="tab-content">
       <div class="services-cards">
-        <article class="service-card-home">
-          <div class="card-image-wrapper">
-            <img src="/images/bebe-signe.jpg" alt="Atelier bébé signe">
-          </div>
-          <div class="card-content">
-            <h3>Atelier bébé signe</h3>
-            <a href="https://calendly.com/votre-compte/atelier-bebe-signe" target="_blank" class="btn-prendre-rdv">Prendre RDV</a>
-          </div>
-        </article>
+        {{ range .Site.Data.services.services }}
+          {{ if eq .category "bebe-signe" }}
+            <article class="service-card-home">
+              <div class="card-image-wrapper">
+                <img src="{{ .image }}" alt="{{ .title }}">
+              </div>
+              <div class="card-content">
+                <h3>{{ .title }}</h3><p class="service-subtitle">{{ .subtitle }}</p>
+                <a href="{{ .cal_link }}" target="_blank" class="btn-prendre-rdv">Prendre RDV</a>
+              </div>
+            </article>
+          {{ end }}
+        {{ end }}
       </div>
     </div>
   </div>
@@ -287,8 +270,28 @@
   font-family: 'Cormorant Garamond', serif;
   font-size: 1.5rem;
   color: #3a2f27;
-  margin: 0 0 1.5rem 0;
+  margin: 0 0 0.5rem 0;
   font-weight: 400;
+  min-height: 3rem;
+  line-height: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.service-subtitle {
+  font-size: 0.95rem;
+  color: #6b5d54;
+  margin: 0 0 1.5rem 0;
+  font-weight: 300;
+  font-style: normal;
+  min-height: 3rem;
+  line-height: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
 }
 
 .btn-prendre-rdv {
@@ -301,6 +304,7 @@
   font-weight: 400;
   transition: all 0.3s ease;
   background: transparent;
+  margin-top: auto;
 }
 
 .btn-prendre-rdv:hover {
@@ -370,3 +374,11 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 </script>
 {{ end }}
+
+
+
+
+
+
+
+
