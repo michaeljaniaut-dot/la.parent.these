@@ -115,6 +115,47 @@
   </div>
 </section>
 
+<section class="boutique-section">
+  <h2 class="boutique-title">La boutique</h2>
+  <div class="boutique-wrapper">
+    <button class="carousel-btn prev-btn" id="prev-btn" aria-label="Précédent">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <polyline points="15 18 9 12 15 6"></polyline>
+      </svg>
+    </button>
+    
+    <div class="boutique-carousel-wrapper">
+      <div class="boutique-carousel" id="carousel-boutique">
+        {{ range .Site.Data.produits.produits }}
+          <article class="produit-card">
+            <a href="{{ .link }}" class="produit-link">
+              <div class="produit-image-wrapper">
+                {{ if .badge }}
+                  <span class="produit-badge">{{ .badge }}</span>
+                {{ end }}
+                <img src="{{ .image }}" alt="{{ .title }}">
+              </div>
+              <div class="produit-content">
+                <h3>{{ .title }}</h3>
+                <p class="produit-stock">{{ .stock }}</p>
+              </div>
+            </a>
+            <div class="produit-actions">
+              <button class="btn-ajouter-panier" data-slug="{{ .slug }}" data-title="{{ .title }}" data-price="{{ .price }}" data-image="{{ .image }}" data-sizes='{{ .sizes | jsonify }}'>Ajouter au panier</button>
+            </div>
+          </article>
+        {{ end }}
+      </div>
+    </div>
+    
+    <button class="carousel-btn next-btn" id="next-btn" aria-label="Suivant">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <polyline points="9 18 15 12 9 6"></polyline>
+      </svg>
+    </button>
+  </div>
+</section>
+
 <style>
 .hero-home {
   position: relative;
@@ -312,6 +353,270 @@
   color: white;
 }
 
+.boutique-section {
+  background: #f5e6e0;
+  padding: 4rem 2rem;
+}
+
+.boutique-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2.5rem;
+  text-align: center;
+  color: #3a2f27;
+  margin: 0 0 3rem 0;
+  font-weight: 400;
+}
+
+.boutique-wrapper {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  position: relative;
+}
+
+.boutique-carousel-wrapper {
+  overflow: hidden;
+  width: 100%;
+  max-width: calc(320px * 3 + 2rem * 2);
+}
+
+.boutique-carousel {
+  display: flex;
+  gap: 2rem;
+  transition: transform 0.5s ease-in-out;
+  width: fit-content;
+}
+
+.carousel-btn {
+  flex-shrink: 0;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 2px solid #a67c52;
+  background: white;
+  color: #a67c52;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  z-index: 10;
+}
+
+.carousel-btn:hover:not(:disabled) {
+  background: #a67c52;
+  color: white;
+}
+
+.carousel-btn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.produit-card {
+  flex: 0 0 320px;
+  width: 320px;
+  background: #fdf8f3;
+  border: 1px solid rgba(139, 69, 19, 0.2);
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+}
+
+.produit-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.produit-link {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+
+.produit-image-wrapper {
+  width: 100%;
+  height: 240px;
+  overflow: hidden;
+  background: white;
+  position: relative;
+}
+
+.produit-badge {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  background: #8B4513;
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  z-index: 10;
+}
+
+.produit-image-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.produit-content {
+  padding: 1.2rem 1.2rem 0.5rem 1.2rem;
+  text-align: center;
+}
+
+.produit-actions {
+  padding: 0 1.2rem 1.2rem 1.2rem;
+  background: #f5ebe5;
+}
+
+.produit-content h3 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.15rem;
+  color: #3a2f27;
+  margin: 0 0 0.5rem 0;
+  font-weight: 400;
+  min-height: 2.3rem;
+  line-height: 1.15rem;
+}
+
+.produit-stock {
+  font-size: 0.85rem;
+  color: #6b5d54;
+  margin: 0 0 1rem 0;
+  min-height: 2.5rem;
+  line-height: 1.25rem;
+}
+
+.btn-ajouter-panier {
+  display: block;
+  width: 100%;
+  padding: 0.65rem 1.5rem;
+  border: 2px solid #a67c52;
+  border-radius: 25px;
+  color: #a67c52;
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 400;
+  transition: all 0.3s ease;
+  background: transparent;
+  cursor: pointer;
+}
+
+.btn-ajouter-panier:hover {
+  background: #a67c52;
+  color: white;
+}
+
+.btn-voir-details {
+  display: inline-block;
+  padding: 0.65rem 1.5rem;
+  border: 2px solid #a67c52;
+  border-radius: 25px;
+  color: #a67c52;
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 400;
+  transition: all 0.3s ease;
+  background: transparent;
+}
+
+.produit-card:hover .btn-voir-details {
+  background: #a67c52;
+  color: white;
+}
+
+/* Modal sélection taille */
+.size-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0,0,0,0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.size-modal-content {
+  background: white;
+  border-radius: 16px;
+  padding: 40px;
+  max-width: 500px;
+  width: 90%;
+  text-align: center;
+  animation: slideUp 0.3s ease;
+}
+
+@keyframes slideUp {
+  from { transform: translateY(50px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+.size-modal-content h3 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 24px;
+  margin-bottom: 15px;
+  color: #333;
+}
+
+.modal-product-name {
+  color: #666;
+  margin-bottom: 30px;
+  font-size: 16px;
+}
+
+.size-options {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+  margin-bottom: 25px;
+}
+
+.size-option {
+  padding: 18px;
+  border: 2px solid #ddd;
+  background: white;
+  border-radius: 10px;
+  font-size: 16px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.size-option:hover {
+  border-color: #a67c52;
+  background: #FFF5F5;
+  transform: scale(1.05);
+}
+
+.modal-close {
+  width: 100%;
+  padding: 12px;
+  background: #f5f5f5;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  color: #666;
+}
+
+.modal-close:hover {
+  background: #e0e0e0;
+}
+
 @media (max-width: 968px) {
   .services-cards {
     grid-template-columns: repeat(2, 1fr);
@@ -324,6 +629,11 @@
 
   .quote-text {
     font-size: 1.5rem;
+  }
+  
+  .carousel-btn {
+    width: 40px;
+    height: 40px;
   }
 }
 
@@ -352,11 +662,26 @@
     font-size: 0.95rem;
     padding: 0.4rem 0.8rem;
   }
+  
+  .boutique-wrapper {
+    gap: 0.5rem;
+  }
+  
+  .carousel-btn {
+    width: 35px;
+    height: 35px;
+  }
+  
+  .produit-card {
+    flex: 0 0 280px;
+    width: 280px;
+  }
 }
 </style>
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
+  // Gestion des onglets services
   const tabs = document.querySelectorAll('.tab-btn');
   const contents = document.querySelectorAll('.tab-content');
 
@@ -369,6 +694,144 @@ document.addEventListener('DOMContentLoaded', function() {
 
       this.classList.add('active');
       document.getElementById('tab-' + tabName).classList.add('active');
+    });
+  });
+
+  // Gestion du carousel boutique
+  const carousel = document.getElementById('carousel-boutique');
+  const prevBtn = document.getElementById('prev-btn');
+  const nextBtn = document.getElementById('next-btn');
+  
+  if (carousel && prevBtn && nextBtn) {
+    let currentIndex = 0;
+    const cards = carousel.querySelectorAll('.produit-card');
+    const totalCards = cards.length;
+    
+    if (totalCards === 0) return;
+    
+    const cardWidth = 320; // largeur de la carte
+    const gap = 32; // 2rem gap
+    const moveDistance = cardWidth + gap;
+    
+    // Si 3 produits ou moins, cacher les boutons
+    if (totalCards <= 3) {
+      prevBtn.style.display = 'none';
+      nextBtn.style.display = 'none';
+      return;
+    }
+    
+    function updateCarousel() {
+      carousel.style.transform = `translateX(-${currentIndex * moveDistance}px)`;
+      
+      // Cacher/afficher les boutons selon la position
+      if (currentIndex === 0) {
+        prevBtn.style.visibility = 'hidden';
+      } else {
+        prevBtn.style.visibility = 'visible';
+      }
+      
+      if (currentIndex >= totalCards - 3) {
+        nextBtn.style.visibility = 'hidden';
+      } else {
+        nextBtn.style.visibility = 'visible';
+      }
+    }
+    
+    prevBtn.addEventListener('click', function() {
+      if (currentIndex > 0) {
+        currentIndex--;
+        updateCarousel();
+      }
+    });
+    
+    nextBtn.addEventListener('click', function() {
+      if (currentIndex < totalCards - 3) {
+        currentIndex++;
+        updateCarousel();
+      }
+    });
+    
+    // Initialisation
+    updateCarousel();
+  }
+
+  // Gestion des modales de sélection de taille
+  document.querySelectorAll('.btn-ajouter-panier').forEach(button => {
+    button.addEventListener('click', function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      
+      const slug = this.getAttribute('data-slug');
+      const title = this.getAttribute('data-title');
+      const price = parseFloat(this.getAttribute('data-price'));
+      const image = this.getAttribute('data-image');
+      const sizes = JSON.parse(this.getAttribute('data-sizes'));
+      
+      console.log('Opening modal for:', title, sizes);
+      
+      const modal = document.createElement('div');
+      modal.className = 'size-modal';
+      
+      let sizesHTML = '';
+      sizes.forEach(size => {
+        sizesHTML += `<button class="size-option" data-slug="${slug}" data-title="${title}" data-price="${price}" data-image="${image}" data-size="${size}">${size}</button>`;
+      });
+      
+      modal.innerHTML = `
+        <div class="size-modal-content">
+          <h3>Sélectionnez une taille</h3>
+          <p class="modal-product-name">${title} - ${price.toFixed(2)}€</p>
+          <div class="size-options">
+            ${sizesHTML}
+          </div>
+          <button class="modal-close">✕ Annuler</button>
+        </div>
+      `;
+      document.body.appendChild(modal);
+      
+      // Event listeners pour les boutons de taille
+      modal.querySelectorAll('.size-option').forEach(btn => {
+        btn.addEventListener('click', function() {
+          const slug = this.getAttribute('data-slug');
+          const title = this.getAttribute('data-title');
+          const price = parseFloat(this.getAttribute('data-price'));
+          const image = this.getAttribute('data-image');
+          const size = this.getAttribute('data-size');
+          
+          const product = {
+            slug: slug,
+            title: title,
+            price: price,
+            image: image,
+            size: size,
+            quantity: 1
+          };
+          
+          let cart = JSON.parse(localStorage.getItem('cart') || '[]');
+          const existing = cart.find(item => item.slug === slug && item.size === size);
+          
+          if (existing) {
+            existing.quantity += 1;
+          } else {
+            cart.push(product);
+          }
+          
+          localStorage.setItem('cart', JSON.stringify(cart));
+          modal.remove();
+          alert('✅ Produit ajouté au panier !');
+        });
+      });
+      
+      // Fermer la modale
+      modal.querySelector('.modal-close').addEventListener('click', function() {
+        modal.remove();
+      });
+      
+      modal.addEventListener('click', function(e) {
+        if (e.target === modal) {
+          modal.remove();
+        }
+      });
     });
   });
 });

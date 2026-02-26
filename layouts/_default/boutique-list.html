@@ -1,0 +1,366 @@
+{{ define "main" }}
+<style>
+.shop-header {
+  text-align: center;
+  padding: 40px 20px;
+  background: linear-gradient(135deg, #fce4ec 0%, #f8bbd0 100%);
+  margin-bottom: 40px;
+  border-radius: 12px;
+}
+
+.shop-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+@media (min-width: 1200px) {
+  .shop-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 1199px) and (min-width: 768px) {
+  .shop-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 767px) {
+  .shop-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.product-card {
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
+  cursor: pointer;
+}
+
+.product-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+}
+
+.product-link {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+
+.product-badge {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 14px;
+  color: white;
+  z-index: 10;
+  background-color: #8B4513;
+}
+
+.product-image {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  background: #f5f5f5;
+}
+
+.product-info {
+  padding: 20px;
+  background: #FFF5F5;
+}
+
+.product-title {
+  font-size: 16px;
+  font-weight: 500;
+  color: #8B4513;
+  margin-bottom: 10px;
+  min-height: 40px;
+}
+
+.product-price {
+  font-size: 18px;
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 15px;
+}
+
+.price-old {
+  text-decoration: line-through;
+  color: #999;
+  font-size: 16px;
+  margin-right: 8px;
+}
+
+.add-to-cart {
+  width: 100%;
+  padding: 12px 20px;
+  background-color: transparent;
+  border: 2px solid #8B4513;
+  border-radius: 25px;
+  color: #8B4513;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 15px;
+}
+
+.add-to-cart:hover {
+  background-color: #8B4513;
+  color: white;
+}
+
+/* Modal sélection taille */
+.size-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0,0,0,0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.size-modal-content {
+  background: white;
+  border-radius: 16px;
+  padding: 40px;
+  max-width: 500px;
+  width: 90%;
+  text-align: center;
+  animation: slideUp 0.3s ease;
+}
+
+@keyframes slideUp {
+  from { transform: translateY(50px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+.size-modal-content h3 {
+  font-size: 24px;
+  margin-bottom: 15px;
+  color: #333;
+}
+
+.modal-product-name {
+  color: #666;
+  margin-bottom: 30px;
+  font-size: 16px;
+}
+
+.size-options {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+  margin-bottom: 25px;
+}
+
+.size-option {
+  padding: 18px;
+  border: 2px solid #ddd;
+  background: white;
+  border-radius: 10px;
+  font-size: 16px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.size-option:hover {
+  border-color: #8B4513;
+  background: #FFF5F5;
+  transform: scale(1.05);
+}
+
+.modal-close {
+  width: 100%;
+  padding: 12px;
+  background: #f5f5f5;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  color: #666;
+}
+
+.modal-close:hover {
+  background: #e0e0e0;
+}
+
+.info-section {
+  max-width: 1400px;
+  margin: 60px auto 40px;
+  padding: 0 20px;
+}
+
+.info-section h2 {
+  font-size: 2rem;
+  color: #8B4513;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.info-section p, .info-section ul {
+  color: #666;
+  line-height: 1.8;
+}
+</style>
+
+<div class="shop-header">
+  <h1>{{ .Title }}</h1>
+  <p>🎁 Frais de port offerts dès 60€ de commande. Profitez-en !</p>
+</div>
+
+<div class="shop-grid">
+  {{ range .Site.Data.produits.produits }}
+  <div class="product-card">
+    <a href="{{ .link }}" class="product-link">
+      {{ if .badge }}
+        <div class="product-badge">{{ .badge }}</div>
+      {{ end }}
+      <img src="{{ .image }}" alt="{{ .title }}" class="product-image">
+      <div class="product-info">
+        <div class="product-title">{{ .title }}</div>
+        <div class="product-price">
+          {{ if gt .old_price 0 }}
+            <span class="price-old">{{ .old_price }}€</span>
+          {{ end }}
+          {{ .price }}€
+        </div>
+      </div>
+    </a>
+    <div class="product-info">
+      <button class="add-to-cart boutique-add-btn" 
+        data-slug="{{ .slug }}" 
+        data-title="{{ .title }}" 
+        data-price="{{ .price }}" 
+        data-image="{{ .image }}" 
+        data-sizes='{{ .sizes | jsonify }}'>
+        Ajouter au panier
+      </button>
+    </div>
+  </div>
+  {{ end }}
+</div>
+
+<div class="info-section">
+  <h2>Comment Commander ?</h2>
+  <p><strong>Option 1 : Contact Direct</strong><br>
+  📧 Email : contact@laparentthese.fr<br>
+  📞 Téléphone : [votre numéro]</p>
+  
+  <p><strong>Option 2 : Paiement en Ligne</strong><br>
+  Cliquez sur "Ajouter au panier" et sélectionnez votre taille.</p>
+
+  <h2>Informations Pratiques</h2>
+  <ul>
+    <li>📦 <strong>Livraison :</strong> Frais offerts dès 60€</li>
+    <li>💳 <strong>Paiement :</strong> Carte bancaire (Stripe), PayPal, virement, espèces</li>
+    <li>↩️ <strong>Retours :</strong> Possibles sous 14 jours</li>
+    <li>🚚 <strong>Délai de livraison :</strong> 3-5 jours ouvrés</li>
+  </ul>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  // Gestion des modales de sélection de taille
+  document.querySelectorAll('.boutique-add-btn').forEach(button => {
+    button.addEventListener('click', function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      
+      const slug = this.getAttribute('data-slug');
+      const title = this.getAttribute('data-title');
+      const price = parseFloat(this.getAttribute('data-price'));
+      const image = this.getAttribute('data-image');
+      const sizes = JSON.parse(this.getAttribute('data-sizes'));
+      
+      const modal = document.createElement('div');
+      modal.className = 'size-modal';
+      
+      let sizesHTML = '';
+      sizes.forEach(size => {
+        sizesHTML += `<button class="size-option" data-slug="${slug}" data-title="${title}" data-price="${price}" data-image="${image}" data-size="${size}">${size}</button>`;
+      });
+      
+      modal.innerHTML = `
+        <div class="size-modal-content">
+          <h3>Sélectionnez une taille</h3>
+          <p class="modal-product-name">${title} - ${price.toFixed(2)}€</p>
+          <div class="size-options">
+            ${sizesHTML}
+          </div>
+          <button class="modal-close">✕ Annuler</button>
+        </div>
+      `;
+      document.body.appendChild(modal);
+      
+      // Event listeners pour les boutons de taille
+      modal.querySelectorAll('.size-option').forEach(btn => {
+        btn.addEventListener('click', function() {
+          const slug = this.getAttribute('data-slug');
+          const title = this.getAttribute('data-title');
+          const price = parseFloat(this.getAttribute('data-price'));
+          const image = this.getAttribute('data-image');
+          const size = this.getAttribute('data-size');
+          
+          const product = {
+            slug: slug,
+            title: title,
+            price: price,
+            image: image,
+            size: size,
+            quantity: 1
+          };
+          
+          let cart = JSON.parse(localStorage.getItem('cart') || '[]');
+          const existing = cart.find(item => item.slug === slug && item.size === size);
+          
+          if (existing) {
+            existing.quantity += 1;
+          } else {
+            cart.push(product);
+          }
+          
+          localStorage.setItem('cart', JSON.stringify(cart));
+          modal.remove();
+          alert('✅ Produit ajouté au panier !');
+        });
+      });
+      
+      // Fermer la modale
+      modal.querySelector('.modal-close').addEventListener('click', function() {
+        modal.remove();
+      });
+      
+      modal.addEventListener('click', function(e) {
+        if (e.target === modal) {
+          modal.remove();
+        }
+      });
+    });
+  });
+});
+</script>
+
+{{ end }}

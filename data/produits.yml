@@ -1,0 +1,51 @@
+produits:
+  - title: "Sarouel évolutif chaud motif pommes"
+    image: "/images/produits/sarouel-pommes-1.jpg"
+    badge: "Bientôt en rupture"
+    stock: "Sarouel évolutif disponibilité immédiate"
+    link: "/produits/sarouel-pommes/"
+    slug: "sarouel-pommes"
+    price: 14.00
+    old_price: 20.00
+    sizes: ["Taille 1 (0-6 mois)", "Taille 2 (6-12 mois)"]
+    
+  - title: "Sarouel évolutif très chaud fleurs"
+    image: "/images/produits/sarouel-pommes-2.jpg"
+    badge: "Déstockage"
+    stock: "Sarouel évolutif très chaud fleurs"
+    link: "/produits/sarouel-fleurs/"
+    slug: "sarouel-fleurs"
+    price: 14.00
+    old_price: 20.00
+    sizes: ["Taille 1 (0-6 mois)", "Taille 2 (6-12 mois)", "Taille 3 (12-18 mois)"]
+    
+  - title: "Sarouel évolutif disponibilité immédiate"
+    image: "/images/produits/sarouel-pommes-3.jpg"
+    badge: ""
+    stock: "Sarouel évolutif disponibilité immédiate"
+    link: "/produits/sarouel-disponible/"
+    slug: "sarouel-dispo"
+    price: 15.00
+    old_price: 0
+    sizes: ["Taille 1", "Taille 2", "Taille 3", "Taille 4"]
+    
+  - title: "Sarouel évolutif motif étoiles"
+    image: "/images/produits/sarouel-pommes-4.jpg"
+    badge: "Nouveau"
+    stock: "Sarouel évolutif en stock"
+    link: "/produits/sarouel-etoiles/"
+    slug: "sarouel-etoiles"
+    price: 15.00
+    old_price: 0
+    sizes: ["Taille 1", "Taille 2", "Taille 3"]
+    
+  - title: "Sarouel évolutif coloré"
+    image: "/images/produits/sarouel-pommes-1.jpg"
+    badge: ""
+    stock: "Plusieurs tailles disponibles"
+    link: "/produits/sarouel-colore/"
+    slug: "sarouel-colore"
+    price: 15.00
+    old_price: 0
+    sizes: ["Taille 1", "Taille 2", "Taille 3", "Taille 4"]
+
